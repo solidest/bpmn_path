@@ -1,0 +1,45 @@
+{
+    "name": "TcgProperty",
+    "uri": "http://kiyun.com/tcg",
+    "prefix": "tcg",
+    "xml": {
+      "tagAlias": "lowerCase"
+    },
+    "types": [
+      {
+        "name": "InnerTcgMap",
+        "extends": [
+          "bpmn:SubProcess"
+        ],
+        "properties": [
+          {
+            "name": "config",
+            "isBody": false,
+            "type": "String"
+          },
+          {
+            "name": "tcgmap",
+            "isBody": true,
+            "type": "String"
+          }
+        ]
+      },
+      {
+        "name": "ExtConfig",
+        "extends": [
+          "bpmn:StartEvent", 
+          "bpmn:ScriptTask",
+          "bpmn:SequenceFlow",
+          "bpmn:StartEvent",
+          "bpmn:BusinessRuleTask"
+        ],
+        "properties": [
+          {
+            "name": "config",
+            "isBody": true,
+            "type": "String"
+          }
+        ]
+      }
+    ]
+  }
