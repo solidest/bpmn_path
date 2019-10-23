@@ -80,9 +80,8 @@ class MapNode {
 
 //模型图类定义
 class MapGraph {
-    constructor(path_depth, wise) {
-        this.path_depth = path_depth ? path_depth : 0;
-        this.wise = wise ? wise : 2;
+    constructor(path_depth) {
+        this.path_depth = path_depth && path_depth>0 ? path_depth : 0;
     }
 
     //是否检执行过模型查过？
@@ -104,7 +103,7 @@ class MapGraph {
     }
 
     //生成路径
-    cratePathes() {
+    createPathes() {
         if (this.path_results) {
             return this.path_results;
         }
@@ -115,10 +114,10 @@ class MapGraph {
 
         if (this.path_depth === 0) {
             //全路径组合
-            createFullPathes();
+            this.path_results = createFullPathes(this);
         } else {
             //模型分层
-            createLevelPathes();
+            this.path_results = createLevelPathes(this);
         }
         return this.path_results;
     }

@@ -8,14 +8,10 @@ const bpmn_demo = require("./demo/demo.json");
 async function test_createPathes(depth) {
 
     let map = await createMap(depth,  bpmn_demo.xml);
-    let pathes = null;
-    if(depth===0) {
-        pathes = createFullPath(map);
-    } else {
-        pathes = createLevelPath(map);
-    }
+    let pathes = map.createPathes();
+
     assert.ok(pathes);
-    console.log(pathes.length);
+    console.log("\n==========生成路径总数：", pathes.length, "===========");
     let index = 1;
     for(let i of pathes) {
         let find = 0;
