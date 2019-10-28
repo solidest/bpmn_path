@@ -18,12 +18,14 @@
 
 示例数据：
 
-    `{
+    ```
+    {
         "$type": "send",
         "channel": "channelname",
         "protocol": "protocolname",
         "databinding": {...}
-    }`
+    }
+    ```
 
 ---
 
