@@ -55,7 +55,7 @@
 
 在指定通道上接收协议数据
 
-    schannel: 动作执行所在通道（stream类型接口）
+    schannel: 接收数据的通道（stream类型接口）
     protocol: 发送动作使用的协议
     timeout: 超时设置
     binding: 协议字段与参数绑定关系
@@ -97,5 +97,130 @@
         "timeout": 3000,
         "schannel": "ch_GPS"
     }
+
+---
+
+#### read
+
+在数字接口或模拟接口上读取一个值
+
+      vchannel: 要读取的通道(value类型的接口)
+      para: 读取结果后赋值给参数
+
+示例数据：
+
+	{
+		"$type": "read",
+		"vchannel": "ch_dio",
+		"para": "para2"
+	}
+
+---
+
+#### write
+
+将参数值写入指定通道(value类型的接口)
+
+    vchannel: 要写入的通道
+    para: 要写入的参数值
+
+示例数据：
+
+	{
+		"$type": "write",
+		"vchannel": "ch_analogy",
+		"para": "para3"
+	}
+
+---
+
+#### delay
+
+延时指定的毫秒数
+
+     manual_continue: 手动继续，true表示暂停执行，等待人工确认后再继续
+     timeout: 延迟继续（ms)，代表延时的时间
+	 
+示例数据：
+
+	{
+	        "$type": "delay",
+	        "manual_continue": false,
+	        "timeout": 999
+	}
+	
+---	
+#### print
+
+依次打印输出传入的参数
+
+    info: 要打印的输出信息
+        
+
+示例数据：
+
+
+	{
+		"$type": "print",
+		"info": "\"arg1的值是：\", arg1"
+	}
+	
+---
+
+#### reset
+
+重置指定的通道，清空输入输出缓冲区
+
+    schannel: 动作执行所在通道（stream类型接口）
+        
+
+示例数据：
+
+	{
+		"$type": "reset",
+		"schannel": "ch_GPS"
+	}
+
+---
+
+#### assert
+
+执行断言
+
+	assert_type: 断言的类型，一下三种取值之一
+		assert.ok: 断言expression表达式计算结果为真
+		assert.changeHigh: 断言vchannel接口电平值由低变高
+		assert.changeLow: 断言vchannel接口电平值由高变低
+	expression: 断言的表达式
+	vchannel: 设置通道名称
+	timeout: 超时设置
+
+示例数据：
+
+	{
+		"$type": "assert",
+		"assert_type": "changeHigh",
+		"expression": null,
+		"vchannel": "ch_dio",
+		"timeout": 3000
+	}
+
+---
+#### call
+
+函数调用
+
+	fun: 被调用的函数名
+	argv: 调用函数传入的参数
+	result: 执行结果赋值给参数
+
+示例数据：
+
+	{
+		"$type": "call",
+		"fun": "function_name",
+		"argv": "para1, para2",
+		"result": "para3"
+	}
 
 ---
