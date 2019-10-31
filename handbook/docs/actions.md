@@ -100,11 +100,11 @@
 
 ---
 
-## delay
+#### delay
 
 延时指定的毫秒数
 
-     manual_continue: 手动继续，选中代表暂停执行
+     manual_continue: 手动继续，true表示暂停执行，等待人工确认后再继续
      timeout: 延迟继续（ms)，代表延时的时间
 	 
 示例数据：
@@ -117,20 +117,20 @@
 	
 ---	
 
-##read
+#### read
 
 在数字接口或模拟接口上读取一个值
 
-      vchannel: 动作执行所在通道
+      vchannel: 动作执行所在通道(数值类型的接口)
       para: 绑定参数
 
 示例数据：
 
 	{
-	        "$type": "read",
-	        "vchannel": "ch_dio",
-	        "para": "para2"
-	 }
+		"$type": "read",
+		"vchannel": "ch_dio",
+		"para": "para2"
+	}
 ---
 
 #### print
@@ -151,7 +151,7 @@
 
 #### write
 
-将指定的参数值写入指定的通道
+将指定的参数值写入指定的通道(数值类型的接口)
 
     vchannel: 动作执行所在通道
     para: 要写入的参数
@@ -203,18 +203,19 @@
 断言某接口的变化
 
     vchannel: 动作执行所在通道
-    expression: 无
-    assert_type: 断言的类型
+    expression: 断言的表达式
+    assert_type: 断言的类型，一下三种取值之一
+    	assert.ok: 断言expression表达式计算结果为真
+	assert.changeHigh: 断言vchannel接口电平值由低变高
+	assert.changeLow: 断言vchannel接口电平值由高变低
     timeout: 超时设置
-   
-        
 
 示例数据：
 
      {
         "$type": "assert",
         "expression": null,
-        "assert_type": "changeHIGH",
+        "assert_type": "changeHigh",
         "vchannel": "ch_dio",
         "timeout": 3000
     }
@@ -230,10 +231,10 @@
 
 示例数据：
 
-     {
-        "$type": "call",
-        "fun": "function_name",
-        "argv": "para1, para2"
-    }
+	{
+		"$type": "call",
+		"fun": "function_name",
+		"argv": "para1, para2"
+	}
 
 ---
