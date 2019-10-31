@@ -2,7 +2,9 @@ site_name: 自动测试建模开发手册
 nav:
     - 概述: index.md
     - 动作原语: actions.md
-    - 执行引擎API: api.md
+    - ETestUSB 引擎API: api_usb.md
+    - ETestRT 引擎API: api_rt.md
+    - ETestLite 引擎API: api_lua.md
     - 通道配置: channel.md
     - dpd说明: dpd.md
 theme: readthedocs

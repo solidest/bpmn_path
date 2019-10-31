@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  
+  <link rel="shortcut icon" href="../img/favicon.ico">
+  <title>ETestLite 引擎API - 自动测试建模开发手册</title>
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="../css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "ETestLite \u5f15\u64ceAPI";
+    var mkdocs_page_input_path = "api_lua.md";
+    var mkdocs_page_url = null;
+  </script>
+  
+  <script src="../js/jquery-2.1.1.min.js" defer></script>
+  <script src="../js/modernizr-2.8.3.min.js" defer></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script> 
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+      <div class="wy-side-nav-search">
+        <a href=".." class="icon icon-home"> 自动测试建模开发手册</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+	<ul class="current">
+	  
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="..">概述</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../actions/">动作原语</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../api_usb/">ETestUSB 引擎API</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../api_rt/">ETestRT 引擎API</a>
+	    </li>
+          
+            <li class="toctree-l1 current">
+		
+    <a class="current" href="./">ETestLite 引擎API</a>
+    <ul class="subnav">
+            
+    <li class="toctree-l2"><a href="#_1">概述</a></li>
+    
+        <ul>
+        
+            <li><a class="toctree-l3" href="#_2">标准库</a></li>
+        
+            <li><a class="toctree-l3" href="#engine">engine库</a></li>
+        
+            <li><a class="toctree-l3" href="#event">event库</a></li>
+        
+            <li><a class="toctree-l3" href="#assert">assert库</a></li>
+        
+            <li><a class="toctree-l3" href="#task">task库</a></li>
+        
+            <li><a class="toctree-l3" href="#math">math库</a></li>
+        
+            <li><a class="toctree-l3" href="#string">string库</a></li>
+        
+            <li><a class="toctree-l3" href="#table">table库</a></li>
+        
+        </ul>
+    
+
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../channel/">通道配置</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../dpd/">dpd说明</a>
+	    </li>
+          
+        </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="..">自动测试建模开发手册</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="..">Docs</a> &raquo;</li>
+    
+      
+    
+    <li>ETestLite 引擎API</li>
+    <li class="wy-breadcrumbs-aside">
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h2 id="_1">概述</h2>
+<blockquote>
+<p>ETestLite使用Lua做为用例开发语言，出Etest标准库外，执行引擎还内置有engine、event、assert、task、math、string、table等API库</p>
+</blockquote>
+<h3 id="_2">标准库</h3>
+<h4 id="cit">cit</h4>
+<pre><code>通信接口表（communication interface table），执行引擎中已经添加的全部接口表
+</code></pre>
+<h4 id="cpt">cpt</h4>
+<pre><code>通信协议表（communication protocol table），执行引擎中已经添加的全部协议表
+</code></pre>
+<h4 id="cvt">cvt</h4>
+<pre><code>现时变量表（current value talbe），执行引擎中已添加的全部现时变量表
+</code></pre>
+<h4 id="cvtadd-name">cvtAdd ( name )</h4>
+<pre><code>添加一个现时变量
+</code></pre>
+<h4 id="cvtdel-name">cvtDel ( name )</h4>
+<pre><code>移除一个现时变量
+</code></pre>
+<h4 id="send-interface-protocol-table_data">send ( interface, protocol, table_data )</h4>
+<pre><code>在指定接口上按照协议发送表数据
+</code></pre>
+<h4 id="recv-interface-protocol-timeout">recv ( interface, protocol, timeout )</h4>
+<pre><code>在指定接口上按照协议接收数据，返回接收结果，超时返回nil
+</code></pre>
+<h4 id="sendbuffer-interface-protocol-string_data">sendBuffer ( interface, protocol, string_data )</h4>
+<pre><code>在指定接口上发送二进制数据
+</code></pre>
+<h4 id="recvbuffer-interface-protocol-timeout">recvBuffer ( interface, protocol, timeout )</h4>
+<pre><code>在指定接口接上收二进制数据，返回string类型的数据，超时返回nil
+</code></pre>
+<h4 id="read-interface">read ( interface )</h4>
+<pre><code>在数字/模拟接口上读取一个值
+</code></pre>
+<h4 id="write-interface-value">write ( interface, value )</h4>
+<pre><code>在数字/模拟接口上写入一个值
+</code></pre>
+<h4 id="startsend-interface-protocol-interval_time-data_generator">startSend ( interface, protocol, interval_time,  data_generator )</h4>
+<pre><code>启动循环发送
+</code></pre>
+<h4 id="stopsend-interface">stopSend ( interface )</h4>
+<pre><code>停止循环发送
+</code></pre>
+<h4 id="startrecv-interface-protocol-afterrecvcallback">startRecv ( interface, protocol, afterRecvCallback )</h4>
+<pre><code>启动持续接收
+</code></pre>
+<h4 id="stoprecv-interface">stopRecv ( interface )</h4>
+<pre><code>停止持续接收
+</code></pre>
+<h4 id="starttone-interface-frequency-duration">startTone ( interface, frequency, duration )</h4>
+<pre><code>在指定接口上发送指定频率（50％占空比）的方波，并持续给定时间长度
+</code></pre>
+<h4 id="stoptone-interface">stopTone ( interface )</h4>
+<pre><code>停止指定接口上的方波发送
+</code></pre>
+<h4 id="pulsein-interface-is_high-timeout">pulseIn ( interface, is_high, timeout )</h4>
+<pre><code>测量指定接口上的脉冲长度
+</code></pre>
+<h4 id="shiftin-interface-time_series-bitorder">shiftIn（ interface, time_series, bitOrder )</h4>
+<pre><code>按时钟顺序指示，逐位移入指定接口上的电平信号值
+</code></pre>
+<h4 id="shiftout-interface-time_series-bitorder-buffer-bitlen">shiftOut （ interface, time_series, bitOrder, buffer, bitLen ）</h4>
+<pre><code>按时钟顺序指示，将buffer值逐位移出到指定接口
+</code></pre>
+<h4 id="call-interface-ext_fun_name-argv_table">call（ interface, ext_fun_name, argv_table )</h4>
+<pre><code>在指定接口上调用一个扩展函数
+</code></pre>
+<h3 id="engine">engine库</h3>
+<pre><code>对用例执行引擎环境进行操作的API
+</code></pre>
+<h4 id="enginecptnew-name-dpd_script">engine.cptNew ( name, dpd_script )</h4>
+<pre><code>在执行引擎上添加一个dpd协议
+</code></pre>
+<h4 id="enginecptdel-name">engine.cptDel ( name )</h4>
+<pre><code>在执行引擎上移除一个dpd协议
+</code></pre>
+<h4 id="enginecitnew-name-inf_config">engine.citNew ( name, inf_config )</h4>
+<pre><code>在执行引擎上添加一个接口定义
+</code></pre>
+<h4 id="enginecitdel-name">engine.citDel ( name )</h4>
+<pre><code>在执行引擎上移除一个接口定义
+</code></pre>
+<h4 id="enginerunscript-case_script">engine.runScript ( case_script )</h4>
+<pre><code>在执行引擎上运行给定的脚本内容
+</code></pre>
+<h4 id="enginerunfile-file_name">engine.runFile ( file_name )</h4>
+<pre><code>在执行引擎上运行给定的脚本文件
+</code></pre>
+<h3 id="event">event库</h3>
+<h4 id="eventonsended-interface-callback">event.onSended ( interface, callback )</h4>
+<pre><code>在指定接口上发送数据完成后执行回调
+</code></pre>
+<h4 id="eventonrecved-interface-callback">event.onRecved ( interface, callback )</h4>
+<pre><code>在指定接口上接收数据完成后执行回调
+</code></pre>
+<h4 id="eventonprotocolsended-interface-protocol-callback">event.onProtocolSended ( interface, protocol, callback )</h4>
+<pre><code>在指定接口上发送协议完成后执行回调
+</code></pre>
+<h4 id="eventonprotocolrecved-interface-protocol-callback">event.onProtocolRecved ( interface, protocol, callback )</h4>
+<pre><code>在指定接口上接收协议完成后执行回调
+</code></pre>
+<h4 id="eventondigitalchanged-interface-callback">event.onDigitalChanged ( interface, callback )</h4>
+<pre><code>在指定dio接口上电平值发生改变后执行回调
+</code></pre>
+<h4 id="eventoncvtchanged-name-callback">event.onCVTChanged ( name, callback )</h4>
+<pre><code>指定的现时变量发生变化时执行回调
+</code></pre>
+<h4 id="eventpub-softbus_name-value">event.pub ( softbus_name, value )</h4>
+<pre><code>在软总线上发布数据
+</code></pre>
+<h4 id="eventsub-sofbus_name-callback">event.sub ( sofbus_name, callback )</h4>
+<pre><code>订阅软总线上的数据
+</code></pre>
+<h3 id="assert">assert库</h3>
+<p>执行断言测试的api库，说明：Lua原生的assert函数不再可用</p>
+<h4 id="assertok-expression-tip">assert.ok ( expression, tip )</h4>
+<pre><code>断言表达式为真，失败后提示tip信息
+</code></pre>
+<h4 id="assertchangehigh-interface-timeout-tip">assert.changeHigh ( interface, timeout, tip )</h4>
+<pre><code>断言给定时间内，指定接口电平值由低变高
+</code></pre>
+<h4 id="assertchangelow-interface-timeout-tip">assert.changeLow ( interface, timeout, tip )</h4>
+<pre><code>断言给定时间内，指定接口电平值由高变低
+</code></pre>
+<h4 id="assertprotocolok-protocol-table_data">assert.protocolOk ( protocol, table_data )</h4>
+<pre><code>断言给定的数据表是有效的协议包
+</code></pre>
+<h3 id="task">task库</h3>
+<p>实现多线程任务的库，线程中创建的任务与主线程共享cvt、cit、cpt，但不共享lua全局变量</p>
+<h4 id="tasknewtask-task_callback-then_callback">task.newTask ( task_callback, then_callback, ... )</h4>
+<pre><code>创建一个独立线程任务，并立即执行，输入可变参数，任务结束后在当前线程执行then回调
+</code></pre>
+<h4 id="tasknewrttask-task_priority-task_callback-then_callback">task.newRTTask ( task_priority, task_callback, then_callback, ... )</h4>
+<pre><code>创建一个指定优先级的实时任务，并立即执行，输入可变参数，任务结束后在当前线程执行then回调
+</code></pre>
+<h3 id="math">math库</h3>
+<p><a href="http://www.lua.org/manual/5.3/">参见Lua手册</a></p>
+<h3 id="string">string库</h3>
+<p><a href="http://www.lua.org/manual/5.3/">参见Lua手册</a></p>
+<h3 id="table">table库</h3>
+<p><a href="http://www.lua.org/manual/5.3/">参见Lua手册</a></p>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../channel/" class="btn btn-neutral float-right" title="通道配置">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../api_rt/" class="btn btn-neutral" title="ETestRT 引擎API"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+      
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+      
+        <span><a href="../api_rt/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="../channel/" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+    <script>var base_url = '..';</script>
+    <script src="../js/theme.js" defer></script>
+      <script src="../search/main.js" defer></script>
+
+</body>
+</html>

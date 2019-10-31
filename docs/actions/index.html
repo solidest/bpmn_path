@@ -74,7 +74,17 @@
           
             <li class="toctree-l1">
 		
-    <a class="" href="../api/">执行引擎API</a>
+    <a class="" href="../api_usb/">ETestUSB 引擎API</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../api_rt/">ETestRT 引擎API</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../api_lua/">ETestLite 引擎API</a>
 	    </li>
           
             <li class="toctree-l1">
@@ -124,40 +134,88 @@
 <hr />
 <h4 id="send">send</h4>
 <p>在指定通道上发送协议数据</p>
-<pre><code>channel: 动作执行所在通道
-
+<pre><code>schannel: 动作执行所在通道（stream类型接口）
 protocol: 发送动作使用的协议
-
-databinding: 协议字段与参数绑定关系
-
-    xxx: 字段绑定
+binding: 协议字段与参数绑定关系
+    name: 协议字段名
+    bindtype: 绑定类型，send只有value值绑定一种类型
+    vbind: 绑定的值
 </code></pre>
 <p>示例数据：</p>
-<pre><code>`{
+<pre><code>{
     "$type": "send",
-    "channel": "channelname",
-    "protocol": "protocolname",
-    "databinding": {...}
-}`
+    "protocol": "pr_GPS",
+    "binding": [{
+        "name": "header",
+        "bindtype": "value",
+        "vbind": "0x55AA"
+    }, {
+        "name": "coordinate",
+        "bindtype": "value",
+        "readonly": true
+    }, {
+        "name": "coordinate.longitude",
+        "bindtype": "value",
+        "vbind": "para1"
+    }, {
+        "name": "coordinate.latitude",
+        "bindtype": "value",
+        "vbind": "para2"
+    }, {
+        "name": "verification",
+        "bindtype": "value",
+        "vbind": "crc(SUM8, longitude, latitude)"
+    }, {
+        "name": "tail",
+        "bindtype": "value",
+        "vbind": "0xAA55"
+    }],
+    "schannel": "ch_GPS"
+}
 </code></pre>
 <hr />
 <h4 id="recv">recv</h4>
 <p>在指定通道上接收协议数据</p>
-<pre><code>channel: 动作执行所在通道
-
+<pre><code>schannel: 动作执行所在通道（stream类型接口）
 protocol: 发送动作使用的协议
-
-databinding: 协议字段与参数绑定关系
-
-    xxx: 字段绑定
+timeout: 超时设置
+binding: 协议字段与参数绑定关系
+    name: 协议字段名
+    bindtype: 绑定类型：assert.ok执行断言，value执行赋值
+    vbind: 绑定的值
 </code></pre>
 <p>示例数据：</p>
-<pre><code>`{
-    "$type": "send",
-    "channel": "channelname",
-    "protocol": "protocolname",
-    "databinding": {...}
-}`
+<pre><code>{
+    "$type": "recv",
+    "protocol": "pr_GPS",
+    "binding": [{
+        "name": "header",
+        "bindtype": "assert.ok",
+        "vbind": "value==0x55AA"
+    }, {
+        "name": "coordinate",
+        "bindtype": "value",
+        "readonly": true
+    }, {
+        "name": "coordinate.longitude",
+        "bindtype": "value",
+        "vbind": "para1"
+    }, {
+        "name": "coordinate.latitude",
+        "bindtype": "value",
+        "vbind": "para2"
+    }, {
+        "name": "verification",
+        "bindtype": "assert.ok",
+        "vbind": "value==crc(SUM8, longitude, latitude)"
+    }, {
+        "name": "tail",
+        "bindtype": "assert.ok",
+        "vbind": "value==0xAA55"
+    }],
+    "timeout": 3000,
+    "schannel": "ch_GPS"
+}
 </code></pre>
 <hr />
               
@@ -167,7 +225,7 @@ databinding: 协议字段与参数绑定关系
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../api/" class="btn btn-neutral float-right" title="执行引擎API">Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="../api_usb/" class="btn btn-neutral float-right" title="ETestUSB 引擎API">Next <span class="icon icon-circle-arrow-right"></span></a>
       
       
         <a href=".." class="btn btn-neutral" title="概述"><span class="icon icon-circle-arrow-left"></span> Previous</a>
@@ -199,7 +257,7 @@ databinding: 协议字段与参数绑定关系
         <span><a href=".." style="color: #fcfcfc;">&laquo; Previous</a></span>
       
       
-        <span style="margin-left: 15px"><a href="../api/" style="color: #fcfcfc">Next &raquo;</a></span>
+        <span style="margin-left: 15px"><a href="../api_usb/" style="color: #fcfcfc">Next &raquo;</a></span>
       
     </span>
 </div>
