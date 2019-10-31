@@ -12,13 +12,25 @@
 #### cvt
     现时变量表（current value talbe），执行引擎中已添加的全部现时变量表
 
-#### cvtAdd ( name )
+#### cvtNew ( name )
     添加一个现时变量
 
 #### cvtDel ( name )
-    移除一个现时变量
+    删除一个现时变量
 
-#### send ( interface, protocol, table_data )
+#### cvtSet ( name, value )
+    设置现时变量的值
+
+#### cvtGet ( name )
+    获取现时变量的值
+
+#### pack ( protocol, data_table )
+    按照指定协议打包数据表，返回 string buffer
+
+#### unpack ( protocol, buffer_string )
+    按照指定协议解包二进制缓存，返回 data_table
+
+#### send ( interface, protocol, data_table )
     在指定接口上按照协议发送表数据
 
 #### recv ( interface, protocol, timeout )
@@ -99,7 +111,7 @@
     在指定接口上接收协议完成后执行回调
 #### event.onDigitalChanged ( interface, callback )
     在指定dio接口上电平值发生改变后执行回调
-#### event.onCVTChanged ( name, callback )
+#### event.onCvtChanged ( name, callback )
     指定的现时变量发生变化时执行回调
 #### event.pub ( softbus_name, value )
     在软总线上发布数据
@@ -115,7 +127,7 @@
     断言给定时间内，指定接口电平值由低变高
 #### assert.changeLow ( interface, timeout, tip )
     断言给定时间内，指定接口电平值由高变低
-#### assert.protocolOk ( protocol, table_data )
+#### assert.protocolOk ( protocol, data_table )
     断言给定的数据表是有效的协议包
 
 ### task库

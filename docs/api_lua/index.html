@@ -155,13 +155,25 @@
 <h4 id="cvt">cvt</h4>
 <pre><code>现时变量表（current value talbe），执行引擎中已添加的全部现时变量表
 </code></pre>
-<h4 id="cvtadd-name">cvtAdd ( name )</h4>
+<h4 id="cvtnew-name">cvtNew ( name )</h4>
 <pre><code>添加一个现时变量
 </code></pre>
 <h4 id="cvtdel-name">cvtDel ( name )</h4>
-<pre><code>移除一个现时变量
+<pre><code>删除一个现时变量
 </code></pre>
-<h4 id="send-interface-protocol-table_data">send ( interface, protocol, table_data )</h4>
+<h4 id="cvtset-name-value">cvtSet ( name, value )</h4>
+<pre><code>设置现时变量的值
+</code></pre>
+<h4 id="cvtget-name">cvtGet ( name )</h4>
+<pre><code>获取现时变量的值
+</code></pre>
+<h4 id="pack-protocol-data_table">pack ( protocol, data_table )</h4>
+<pre><code>按照指定协议打包数据表，返回 string buffer
+</code></pre>
+<h4 id="unpack-protocol-buffer_string">unpack ( protocol, buffer_string )</h4>
+<pre><code>按照指定协议解包二进制缓存，返回 data_table
+</code></pre>
+<h4 id="send-interface-protocol-data_table">send ( interface, protocol, data_table )</h4>
 <pre><code>在指定接口上按照协议发送表数据
 </code></pre>
 <h4 id="recv-interface-protocol-timeout">recv ( interface, protocol, timeout )</h4>
@@ -246,7 +258,7 @@
 <h4 id="eventondigitalchanged-interface-callback">event.onDigitalChanged ( interface, callback )</h4>
 <pre><code>在指定dio接口上电平值发生改变后执行回调
 </code></pre>
-<h4 id="eventoncvtchanged-name-callback">event.onCVTChanged ( name, callback )</h4>
+<h4 id="eventoncvtchanged-name-callback">event.onCvtChanged ( name, callback )</h4>
 <pre><code>指定的现时变量发生变化时执行回调
 </code></pre>
 <h4 id="eventpub-softbus_name-value">event.pub ( softbus_name, value )</h4>
@@ -266,7 +278,7 @@
 <h4 id="assertchangelow-interface-timeout-tip">assert.changeLow ( interface, timeout, tip )</h4>
 <pre><code>断言给定时间内，指定接口电平值由高变低
 </code></pre>
-<h4 id="assertprotocolok-protocol-table_data">assert.protocolOk ( protocol, table_data )</h4>
+<h4 id="assertprotocolok-protocol-data_table">assert.protocolOk ( protocol, data_table )</h4>
 <pre><code>断言给定的数据表是有效的协议包
 </code></pre>
 <h3 id="task">task库</h3>
