@@ -1,6 +1,7 @@
 ## 概述
-> ETestLite使用Lua做为用例开发语言，出Etest标准库外，执行引擎还内置有engine、event、assert、task、math、string、table等API库
+> ETestLite使用Lua做为开发用例的脚本语言，除[标准库](#_2)里的全局函数外，执行引擎还内置有[engine](#engine)、[event](#event)、[assert](#assert)、[task](#task)、[math](#math)、[string](#string)、[table](#table)等API库
 
+---
 ### 标准库
 
 #### cit 
@@ -25,7 +26,7 @@
     获取现时变量的值
 
 #### pack ( protocol, data_table )
-    按照指定协议打包数据表，返回 string buffer
+    按照指定协议打包数据表，返回 string_buffer
 
 #### unpack ( protocol, buffer_string )
     按照指定协议解包二进制缓存，返回 data_table
@@ -78,16 +79,17 @@
 #### call（ interface, ext_fun_name, argv_table )
     在指定接口上调用一个扩展函数
 
+---
 ### engine库
     对用例执行引擎环境进行操作的API
 
-#### engine.cptNew ( name, dpd_script )
+#### engine.cptNew ( name, dpd_json )
     在执行引擎上添加一个dpd协议
 
 #### engine.cptDel ( name )
     在执行引擎上移除一个dpd协议
     
-#### engine.citNew ( name, inf_config )
+#### engine.citNew ( name, config_json )
     在执行引擎上添加一个接口定义
 
 #### engine.citDel ( name )
@@ -98,6 +100,8 @@
 
 #### engine.runFile ( file_name )
     在执行引擎上运行给定的脚本文件
+
+---
 
 ### event库
 
@@ -118,6 +122,7 @@
 #### event.sub ( sofbus_name, callback )
     订阅软总线上的数据
 
+---
 ### assert库
 执行断言测试的api库，说明：Lua原生的assert函数不再可用
 
@@ -130,6 +135,7 @@
 #### assert.protocolOk ( protocol, data_table )
     断言给定的数据表是有效的协议包
 
+---
 ### task库
 实现多线程任务的库，线程中创建的任务与主线程共享cvt、cit、cpt，但不共享lua全局变量
 
@@ -139,15 +145,72 @@
 #### task.newRTTask ( task_priority, task_callback, then_callback, ... )
     创建一个指定优先级的实时任务，并立即执行，输入可变参数，任务结束后在当前线程执行then回调
 
+---
+
 ### math库
-[参见Lua手册](http://www.lua.org/manual/5.3/)
+数学函数库，[详见Lua文档](http://www.lua.org/manual/5.3/)
+#### math.abs
+#### math.acos
+#### math.asin
+#### math.atan
+#### math.ceil
+#### math.cos
+#### math.deg
+#### math.exp
+#### math.floor
+#### math.fmod
+#### math.huge
+#### math.log
+#### math.max
+#### math.maxinteger
+#### math.min
+#### math.mininteger
+#### math.modf
+#### math.pi
+#### math.rad
+#### math.random
+#### math.randomseed
+#### math.sin
+#### math.sqrt
+#### math.tan
+#### math.tointeger
+#### math.type
+#### #### math.ult
+
+---
 
 ### string库
-[参见Lua手册](http://www.lua.org/manual/5.3/)
+字符串操作库，[详见Lua文档](http://www.lua.org/manual/5.3/)
+
+#### string.byte
+#### string.char
+#### string.dump
+#### string.find
+#### string.format
+#### string.gmatch
+#### string.gsub
+#### string.len
+#### string.lower
+#### string.match
+#### string.pack
+#### string.packsize
+#### string.rep
+#### string.reverse
+#### string.sub
+#### string.unpack
+#### string.upper
+
+---
 
 ### table库
-[参见Lua手册](http://www.lua.org/manual/5.3/)
-
+表数据操作库，[详见Lua文档](http://www.lua.org/manual/5.3/)
+#### table.concat
+#### table.insert
+#### table.move
+#### table.pack
+#### table.remove
+#### table.sort
+#### table.unpack
 
 
 

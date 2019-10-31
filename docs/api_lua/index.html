@@ -143,8 +143,9 @@
               
                 <h2 id="_1">概述</h2>
 <blockquote>
-<p>ETestLite使用Lua做为用例开发语言，出Etest标准库外，执行引擎还内置有engine、event、assert、task、math、string、table等API库</p>
+<p>ETestLite使用Lua做为开发用例的脚本语言，除<a href="#_2">标准库</a>里的全局函数外，执行引擎还内置有<a href="#engine">engine</a>、<a href="#event">event</a>、<a href="#assert">assert</a>、<a href="#task">task</a>、<a href="#math">math</a>、<a href="#string">string</a>、<a href="#table">table</a>等API库</p>
 </blockquote>
+<hr />
 <h3 id="_2">标准库</h3>
 <h4 id="cit">cit</h4>
 <pre><code>通信接口表（communication interface table），执行引擎中已经添加的全部接口表
@@ -168,7 +169,7 @@
 <pre><code>获取现时变量的值
 </code></pre>
 <h4 id="pack-protocol-data_table">pack ( protocol, data_table )</h4>
-<pre><code>按照指定协议打包数据表，返回 string buffer
+<pre><code>按照指定协议打包数据表，返回 string_buffer
 </code></pre>
 <h4 id="unpack-protocol-buffer_string">unpack ( protocol, buffer_string )</h4>
 <pre><code>按照指定协议解包二进制缓存，返回 data_table
@@ -221,16 +222,17 @@
 <h4 id="call-interface-ext_fun_name-argv_table">call（ interface, ext_fun_name, argv_table )</h4>
 <pre><code>在指定接口上调用一个扩展函数
 </code></pre>
+<hr />
 <h3 id="engine">engine库</h3>
 <pre><code>对用例执行引擎环境进行操作的API
 </code></pre>
-<h4 id="enginecptnew-name-dpd_script">engine.cptNew ( name, dpd_script )</h4>
+<h4 id="enginecptnew-name-dpd_json">engine.cptNew ( name, dpd_json )</h4>
 <pre><code>在执行引擎上添加一个dpd协议
 </code></pre>
 <h4 id="enginecptdel-name">engine.cptDel ( name )</h4>
 <pre><code>在执行引擎上移除一个dpd协议
 </code></pre>
-<h4 id="enginecitnew-name-inf_config">engine.citNew ( name, inf_config )</h4>
+<h4 id="enginecitnew-name-config_json">engine.citNew ( name, config_json )</h4>
 <pre><code>在执行引擎上添加一个接口定义
 </code></pre>
 <h4 id="enginecitdel-name">engine.citDel ( name )</h4>
@@ -242,6 +244,7 @@
 <h4 id="enginerunfile-file_name">engine.runFile ( file_name )</h4>
 <pre><code>在执行引擎上运行给定的脚本文件
 </code></pre>
+<hr />
 <h3 id="event">event库</h3>
 <h4 id="eventonsended-interface-callback">event.onSended ( interface, callback )</h4>
 <pre><code>在指定接口上发送数据完成后执行回调
@@ -267,6 +270,7 @@
 <h4 id="eventsub-sofbus_name-callback">event.sub ( sofbus_name, callback )</h4>
 <pre><code>订阅软总线上的数据
 </code></pre>
+<hr />
 <h3 id="assert">assert库</h3>
 <p>执行断言测试的api库，说明：Lua原生的assert函数不再可用</p>
 <h4 id="assertok-expression-tip">assert.ok ( expression, tip )</h4>
@@ -281,6 +285,7 @@
 <h4 id="assertprotocolok-protocol-data_table">assert.protocolOk ( protocol, data_table )</h4>
 <pre><code>断言给定的数据表是有效的协议包
 </code></pre>
+<hr />
 <h3 id="task">task库</h3>
 <p>实现多线程任务的库，线程中创建的任务与主线程共享cvt、cit、cpt，但不共享lua全局变量</p>
 <h4 id="tasknewtask-task_callback-then_callback">task.newTask ( task_callback, then_callback, ... )</h4>
@@ -289,12 +294,66 @@
 <h4 id="tasknewrttask-task_priority-task_callback-then_callback">task.newRTTask ( task_priority, task_callback, then_callback, ... )</h4>
 <pre><code>创建一个指定优先级的实时任务，并立即执行，输入可变参数，任务结束后在当前线程执行then回调
 </code></pre>
+<hr />
 <h3 id="math">math库</h3>
-<p><a href="http://www.lua.org/manual/5.3/">参见Lua手册</a></p>
+<p>数学函数库，<a href="http://www.lua.org/manual/5.3/">详见Lua文档</a></p>
+<h4 id="mathabs">math.abs</h4>
+<h4 id="mathacos">math.acos</h4>
+<h4 id="mathasin">math.asin</h4>
+<h4 id="mathatan">math.atan</h4>
+<h4 id="mathceil">math.ceil</h4>
+<h4 id="mathcos">math.cos</h4>
+<h4 id="mathdeg">math.deg</h4>
+<h4 id="mathexp">math.exp</h4>
+<h4 id="mathfloor">math.floor</h4>
+<h4 id="mathfmod">math.fmod</h4>
+<h4 id="mathhuge">math.huge</h4>
+<h4 id="mathlog">math.log</h4>
+<h4 id="mathmax">math.max</h4>
+<h4 id="mathmaxinteger">math.maxinteger</h4>
+<h4 id="mathmin">math.min</h4>
+<h4 id="mathmininteger">math.mininteger</h4>
+<h4 id="mathmodf">math.modf</h4>
+<h4 id="mathpi">math.pi</h4>
+<h4 id="mathrad">math.rad</h4>
+<h4 id="mathrandom">math.random</h4>
+<h4 id="mathrandomseed">math.randomseed</h4>
+<h4 id="mathsin">math.sin</h4>
+<h4 id="mathsqrt">math.sqrt</h4>
+<h4 id="mathtan">math.tan</h4>
+<h4 id="mathtointeger">math.tointeger</h4>
+<h4 id="mathtype">math.type</h4>
+<h4 id="mathult">#### math.ult</h4>
+<hr />
 <h3 id="string">string库</h3>
-<p><a href="http://www.lua.org/manual/5.3/">参见Lua手册</a></p>
+<p>字符串操作库，<a href="http://www.lua.org/manual/5.3/">详见Lua文档</a></p>
+<h4 id="stringbyte">string.byte</h4>
+<h4 id="stringchar">string.char</h4>
+<h4 id="stringdump">string.dump</h4>
+<h4 id="stringfind">string.find</h4>
+<h4 id="stringformat">string.format</h4>
+<h4 id="stringgmatch">string.gmatch</h4>
+<h4 id="stringgsub">string.gsub</h4>
+<h4 id="stringlen">string.len</h4>
+<h4 id="stringlower">string.lower</h4>
+<h4 id="stringmatch">string.match</h4>
+<h4 id="stringpack">string.pack</h4>
+<h4 id="stringpacksize">string.packsize</h4>
+<h4 id="stringrep">string.rep</h4>
+<h4 id="stringreverse">string.reverse</h4>
+<h4 id="stringsub">string.sub</h4>
+<h4 id="stringunpack">string.unpack</h4>
+<h4 id="stringupper">string.upper</h4>
+<hr />
 <h3 id="table">table库</h3>
-<p><a href="http://www.lua.org/manual/5.3/">参见Lua手册</a></p>
+<p>表数据操作库，<a href="http://www.lua.org/manual/5.3/">详见Lua文档</a></p>
+<h4 id="tableconcat">table.concat</h4>
+<h4 id="tableinsert">table.insert</h4>
+<h4 id="tablemove">table.move</h4>
+<h4 id="tablepack">table.pack</h4>
+<h4 id="tableremove">table.remove</h4>
+<h4 id="tablesort">table.sort</h4>
+<h4 id="tableunpack">table.unpack</h4>
               
             </div>
           </div>
