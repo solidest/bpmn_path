@@ -159,11 +159,11 @@
 
 示例数据：
 
-    {
-	"$type": "write",
-        "vchannel": "ch_analogy",
-        "para": "para3"
-    }
+	{
+		"$type": "write",
+		"vchannel": "ch_analogy",
+		"para": "para3"
+	}
 
 ---
 
@@ -176,10 +176,10 @@
 
 示例数据：
 
-    {
-	"$type": "reset",
-        "schannel": "ch_GPS"
-    }
+	{
+		"$type": "reset",
+		"schannel": "ch_GPS"
+	}
 
 ---
 #### assert
