@@ -143,7 +143,7 @@
 示例数据：
 
     {
-		"$type": "print",
+	"$type": "print",
         "info": "\"arg1的值是：\", arg1"
     }
 
@@ -159,7 +159,7 @@
 示例数据：
 
     {
-		"$type": "write",
+	"$type": "write",
         "vchannel": "ch_analogy",
         "para": "para3"
     }
@@ -176,7 +176,7 @@
 示例数据：
 
     {
-		"$type": "reset",
+	"$type": "reset",
         "schannel": "ch_GPS"
     }
 
