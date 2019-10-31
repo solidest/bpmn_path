@@ -205,7 +205,7 @@
 <pre><code>停止持续接收
 </code></pre>
 <h4 id="starttone-interface-frequency-duration">startTone ( interface, frequency, duration )</h4>
-<pre><code>在指定接口上发送指定频率（50％占空比）的方波，并持续给定时间长度
+<pre><code>在指定接口上发送指定频率（50％占空比）的方波，并持续指定时间长度
 </code></pre>
 <h4 id="stoptone-interface">stopTone ( interface )</h4>
 <pre><code>停止指定接口上的方波发送
@@ -239,10 +239,16 @@
 <pre><code>在执行引擎上移除一个接口定义
 </code></pre>
 <h4 id="enginerunscript-case_script">engine.runScript ( case_script )</h4>
-<pre><code>在执行引擎上运行给定的脚本内容
+<pre><code>在执行引擎上运行指定的脚本内容
 </code></pre>
 <h4 id="enginerunfile-file_name">engine.runFile ( file_name )</h4>
-<pre><code>在执行引擎上运行给定的脚本文件
+<pre><code>在执行引擎上运行指定的脚本文件
+</code></pre>
+<h4 id="enginerunrtscript-case_script">engine.runRTScript ( case_script )</h4>
+<pre><code>以实时模式，在执行引擎上运行指定的脚本文件
+</code></pre>
+<h4 id="enginerunrtfile-file_name">engine.runRTFile ( file_name )</h4>
+<pre><code>以实时模式，在执行引擎上运行指定的脚本文件
 </code></pre>
 <hr />
 <h3 id="event">event库</h3>
@@ -277,13 +283,13 @@
 <pre><code>断言表达式为真，失败后提示tip信息
 </code></pre>
 <h4 id="assertchangehigh-interface-timeout-tip">assert.changeHigh ( interface, timeout, tip )</h4>
-<pre><code>断言给定时间内，指定接口电平值由低变高
+<pre><code>断言指定时间内，指定接口电平值由低变高
 </code></pre>
 <h4 id="assertchangelow-interface-timeout-tip">assert.changeLow ( interface, timeout, tip )</h4>
-<pre><code>断言给定时间内，指定接口电平值由高变低
+<pre><code>断言指定时间内，指定接口电平值由高变低
 </code></pre>
 <h4 id="assertprotocolok-protocol-data_table">assert.protocolOk ( protocol, data_table )</h4>
-<pre><code>断言给定的数据表是有效的协议包
+<pre><code>断言指定的数据表是有效的协议包
 </code></pre>
 <hr />
 <h3 id="task">task库</h3>

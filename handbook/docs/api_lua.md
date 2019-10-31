@@ -62,7 +62,7 @@
     停止持续接收
 
 #### startTone ( interface, frequency, duration )
-    在指定接口上发送指定频率（50％占空比）的方波，并持续给定时间长度
+    在指定接口上发送指定频率（50％占空比）的方波，并持续指定时间长度
 
 #### stopTone ( interface )
     停止指定接口上的方波发送
@@ -96,10 +96,16 @@
     在执行引擎上移除一个接口定义
 
 #### engine.runScript ( case_script )
-    在执行引擎上运行给定的脚本内容
+    在执行引擎上运行指定的脚本内容
 
 #### engine.runFile ( file_name )
-    在执行引擎上运行给定的脚本文件
+    在执行引擎上运行指定的脚本文件
+
+#### engine.runRTScript ( case_script )
+    以实时模式，在执行引擎上运行指定的脚本文件
+
+#### engine.runRTFile ( file_name )
+    以实时模式，在执行引擎上运行指定的脚本文件
 
 ---
 
@@ -129,11 +135,11 @@
 #### assert.ok ( expression, tip )
     断言表达式为真，失败后提示tip信息
 #### assert.changeHigh ( interface, timeout, tip )
-    断言给定时间内，指定接口电平值由低变高
+    断言指定时间内，指定接口电平值由低变高
 #### assert.changeLow ( interface, timeout, tip )
-    断言给定时间内，指定接口电平值由高变低
+    断言指定时间内，指定接口电平值由高变低
 #### assert.protocolOk ( protocol, data_table )
-    断言给定的数据表是有效的协议包
+    断言指定的数据表是有效的协议包
 
 ---
 ### task库
