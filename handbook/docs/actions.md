@@ -142,11 +142,12 @@
 
 示例数据：
 
-    {
-	"$type": "print",
-        "info": "\"arg1的值是：\", arg1"
-    }
 
+	{
+		"$type": "print",
+		"info": "\"arg1的值是：\", arg1"
+	}
+	
 ---
 
 #### write
