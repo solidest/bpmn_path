@@ -196,13 +196,13 @@
 
 示例数据：
 
-     {
-        "$type": "assert",
-        "expression": null,
-        "assert_type": "changeHigh",
-        "vchannel": "ch_dio",
-        "timeout": 3000
-    }
+	{
+		"$type": "assert",
+		"expression": null,
+		"assert_type": "changeHigh",
+		"vchannel": "ch_dio",
+		"timeout": 3000
+	}
 
 ---
 #### call
