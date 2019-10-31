@@ -86,12 +86,6 @@
 ### engine库
     对用例执行引擎环境进行操作的API
 
-#### engine.pause ()
-    暂停引擎执行
-
-#### engine.continue ()
-    继续引擎执行
-
 #### engine.cptNew ( name, dpd_json )
     在执行引擎上添加一个dpd协议
 
@@ -115,6 +109,12 @@
 
 #### engine.runRTFile ( file_name )
     以实时模式，在执行引擎上运行指定的脚本文件
+
+#### engine.pause ()
+    暂停引擎执行
+
+#### engine.continue ()
+    继续引擎执行
 
 ---
 
