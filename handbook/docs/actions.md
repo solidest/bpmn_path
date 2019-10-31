@@ -55,7 +55,7 @@
 
 在指定通道上接收协议数据
 
-    schannel: 动作执行所在通道（stream类型接口）
+    schannel: 接收数据的通道（stream类型接口）
     protocol: 发送动作使用的协议
     timeout: 超时设置
     binding: 协议字段与参数绑定关系
@@ -100,6 +100,40 @@
 
 ---
 
+#### read
+
+在数字接口或模拟接口上读取一个值
+
+      vchannel: 要读取的通道(value类型的接口)
+      para: 绑定参数
+
+示例数据：
+
+	{
+		"$type": "read",
+		"vchannel": "ch_dio",
+		"para": "para2"
+	}
+
+---
+
+#### write
+
+将指定的参数值写入指定的通道(value的接口)
+
+    vchannel: 要写入的通道
+    para: 要写入的参数
+
+示例数据：
+
+	{
+		"$type": "write",
+		"vchannel": "ch_analogy",
+		"para": "para3"
+	}
+
+---
+
 #### delay
 
 延时指定的毫秒数
@@ -116,23 +150,6 @@
 	}
 	
 ---	
-
-#### read
-
-在数字接口或模拟接口上读取一个值
-
-      vchannel: 动作执行所在通道(数值类型的接口)
-      para: 绑定参数
-
-示例数据：
-
-	{
-		"$type": "read",
-		"vchannel": "ch_dio",
-		"para": "para2"
-	}
----
-
 #### print
 
 依次打印输出传入的参数
@@ -148,23 +165,6 @@
 		"info": "\"arg1的值是：\", arg1"
 	}
 	
----
-
-#### write
-
-将指定的参数值写入指定的通道(数值类型的接口)
-
-    vchannel: 动作执行所在通道
-    para: 要写入的参数
-
-示例数据：
-
-	{
-		"$type": "write",
-		"vchannel": "ch_analogy",
-		"para": "para3"
-	}
-
 ---
 
 #### reset
