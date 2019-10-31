@@ -5,6 +5,6 @@ nav:
     - ETestUSB 引擎API: api_usb.md
     - ETestRT 引擎API: api_rt.md
     - ETestLite 引擎API: api_lua.md
-    - 通道配置: channel.md
-    - dpd说明: dpd.md
+    - 接口配置: interface.md
+    - 协议配置: protocol.md
 theme: readthedocs
