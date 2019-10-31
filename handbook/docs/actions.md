@@ -182,34 +182,17 @@
     }
 
 ---
-
 #### assert
 
-断言为真
+执行断言
 
-    expression: 输入的表达式
-    assert_type: 断言的类型
-
-示例数据：
-
-     {
-        "$type": "assert",
-        "expression": "para1>0",
-        "assert_type": "ok"
-     }
-
----
-#### assert
-
-断言某接口的变化
-
-    vchannel: 动作执行所在通道
-    expression: 断言的表达式
-    assert_type: 断言的类型，一下三种取值之一
-    	assert.ok: 断言expression表达式计算结果为真
-	assert.changeHigh: 断言vchannel接口电平值由低变高
-	assert.changeLow: 断言vchannel接口电平值由高变低
-    timeout: 超时设置
+	expression: 断言的表达式
+	assert_type: 断言的类型，一下三种取值之一
+		assert.ok: 断言expression表达式计算结果为真
+		assert.changeHigh: 断言vchannel接口电平值由低变高
+		assert.changeLow: 断言vchannel接口电平值由高变低
+	vchannel: 设置通道名称
+	timeout: 超时设置
 
 示例数据：
 
