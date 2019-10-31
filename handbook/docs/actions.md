@@ -99,3 +99,27 @@
     }
 
 ---
+
+#### print
+
+在指定通道上接收协议数据
+
+    schannel: 动作执行所在通道（stream类型接口）
+    protocol: 发送动作使用的协议
+    timeout: 超时设置
+    binding: 协议字段与参数绑定关系
+        name: 协议字段名
+        bindtype: 绑定类型：assert.ok执行断言，value执行赋值
+        vbind: 绑定的值
+        
+
+示例数据：
+
+    {
+        "$type": "recv",
+        "protocol": "pr_GPS",
+        "timeout": 3000,
+        "schannel": "ch_GPS"
+    }
+
+---
