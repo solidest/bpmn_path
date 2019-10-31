@@ -66,6 +66,20 @@
         
             <li><a class="toctree-l3" href="#recv">recv</a></li>
         
+            <li><a class="toctree-l3" href="#read">read</a></li>
+        
+            <li><a class="toctree-l3" href="#write">write</a></li>
+        
+            <li><a class="toctree-l3" href="#delay">delay</a></li>
+        
+            <li><a class="toctree-l3" href="#print">print</a></li>
+        
+            <li><a class="toctree-l3" href="#reset">reset</a></li>
+        
+            <li><a class="toctree-l3" href="#assert">assert</a></li>
+        
+            <li><a class="toctree-l3" href="#call">call</a></li>
+        
         </ul>
     
 
@@ -176,7 +190,7 @@ binding: 协议字段与参数绑定关系
 <hr />
 <h4 id="recv">recv</h4>
 <p>在指定通道上接收协议数据</p>
-<pre><code>schannel: 动作执行所在通道（stream类型接口）
+<pre><code>schannel: 接收数据的通道（stream类型接口）
 protocol: 发送动作使用的协议
 timeout: 超时设置
 binding: 协议字段与参数绑定关系
@@ -215,6 +229,102 @@ binding: 协议字段与参数绑定关系
     }],
     "timeout": 3000,
     "schannel": "ch_GPS"
+}
+</code></pre>
+<hr />
+<h4 id="read">read</h4>
+<p>在数字接口或模拟接口上读取一个值</p>
+<pre><code>  vchannel: 要读取的通道(value类型的接口)
+  para: 读取结果后赋值给参数
+</code></pre>
+<p>示例数据：</p>
+<pre><code>{
+    "$type": "read",
+    "vchannel": "ch_dio",
+    "para": "para2"
+}
+</code></pre>
+<hr />
+<h4 id="write">write</h4>
+<p>将参数值写入指定通道(value类型的接口)</p>
+<pre><code>vchannel: 要写入的通道
+para: 要写入的参数值
+</code></pre>
+<p>示例数据：</p>
+<pre><code>{
+    "$type": "write",
+    "vchannel": "ch_analogy",
+    "para": "para3"
+}
+</code></pre>
+<hr />
+<h4 id="delay">delay</h4>
+<p>延时指定的毫秒数</p>
+<pre><code> manual_continue: 手动继续，true表示暂停执行，等待人工确认后再继续
+ timeout: 延迟继续（ms)，代表延时的时间
+</code></pre>
+<p>示例数据：</p>
+<pre><code>{
+        "$type": "delay",
+        "manual_continue": false,
+        "timeout": 999
+}
+</code></pre>
+<hr />
+<h4 id="print">print</h4>
+<p>依次打印输出传入的参数</p>
+<pre><code>info: 要打印的输出信息
+</code></pre>
+<p>示例数据：</p>
+<pre><code>{
+    "$type": "print",
+    "info": "\"arg1的值是：\", arg1"
+}
+</code></pre>
+<hr />
+<h4 id="reset">reset</h4>
+<p>重置指定的通道，清空输入输出缓冲区</p>
+<pre><code>schannel: 动作执行所在通道（stream类型接口）
+</code></pre>
+<p>示例数据：</p>
+<pre><code>{
+    "$type": "reset",
+    "schannel": "ch_GPS"
+}
+</code></pre>
+<hr />
+<h4 id="assert">assert</h4>
+<p>执行断言</p>
+<pre><code>assert_type: 断言的类型，一下三种取值之一
+    assert.ok: 断言expression表达式计算结果为真
+    assert.changeHigh: 断言vchannel接口电平值由低变高
+    assert.changeLow: 断言vchannel接口电平值由高变低
+expression: 断言的表达式
+vchannel: 设置通道名称
+timeout: 超时设置
+</code></pre>
+<p>示例数据：</p>
+<pre><code>{
+    "$type": "assert",
+    "assert_type": "changeHigh",
+    "expression": null,
+    "vchannel": "ch_dio",
+    "timeout": 3000
+}
+</code></pre>
+<hr />
+<h4 id="call">call</h4>
+<p>函数调用</p>
+<pre><code>fun: 被调用的函数名
+argv: 调用函数传入的参数
+result: 执行结果赋值给参数
+</code></pre>
+<p>示例数据：</p>
+<pre><code>{
+    "$type": "call",
+    "fun": "function_name",
+    "argv": "para1, para2",
+    "result": "para3"
 }
 </code></pre>
 <hr />
