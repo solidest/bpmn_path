@@ -105,7 +105,7 @@
 在数字接口或模拟接口上读取一个值
 
       vchannel: 要读取的通道(value类型的接口)
-      para: 绑定参数
+      para: 读取结果后赋值给参数
 
 示例数据：
 
@@ -119,10 +119,10 @@
 
 #### write
 
-将指定的参数值写入指定的通道(value的接口)
+将参数值写入指定通道(value类型的接口)
 
     vchannel: 要写入的通道
-    para: 要写入的参数
+    para: 要写入的参数值
 
 示例数据：
 
@@ -154,7 +154,7 @@
 
 依次打印输出传入的参数
 
-    info: 要打印的的输出信息
+    info: 要打印的输出信息
         
 
 示例数据：
@@ -182,15 +182,16 @@
 	}
 
 ---
+
 #### assert
 
 执行断言
 
-	expression: 断言的表达式
 	assert_type: 断言的类型，一下三种取值之一
 		assert.ok: 断言expression表达式计算结果为真
 		assert.changeHigh: 断言vchannel接口电平值由低变高
 		assert.changeLow: 断言vchannel接口电平值由高变低
+	expression: 断言的表达式
 	vchannel: 设置通道名称
 	timeout: 超时设置
 
@@ -198,8 +199,8 @@
 
 	{
 		"$type": "assert",
-		"expression": null,
 		"assert_type": "changeHigh",
+		"expression": null,
 		"vchannel": "ch_dio",
 		"timeout": 3000
 	}
@@ -209,16 +210,17 @@
 
 函数调用
 
-    fun: 被调用的函数名
-    argv: 调用函数传入的参数
-   
+	fun: 被调用的函数名
+	argv: 调用函数传入的参数
+	result: 执行结果赋值给参数
 
 示例数据：
 
 	{
 		"$type": "call",
 		"fun": "function_name",
-		"argv": "para1, para2"
+		"argv": "para1, para2",
+		"result": "para3"
 	}
 
 ---
