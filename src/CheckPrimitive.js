@@ -1,32 +1,39 @@
 
-const CheckPrimitiveResult = require('./CheckPrimitiveResult');
-
 //检查recv原语设置是否正确
 function checkRecv(prim) {
+    if(!prim) {
+        return null;
+    }
+    //TODO
 
-   return null;
+    return null;
 }
 
 //检查send原语设置是否正确
 function checkSend(prim) {
-    
+    if(!prim) {
+        return null;
+    }
+    //TODO
+
     return null;
  }
 
 //检查assert原语设置是否正确
 function checkAssert(prim) {
+
     if(!prim || !prim.assert_type) {
-        return "未设置断言参数";
+        return null;
     }
     switch (prim.assert_type) {
-        case "assert.ok":
+        case "ok":
             if(!prim.expression) {
                 return "未设置断言表达式";
             }
             break;
 
-        case "assert.changeHigh":
-        case "assert.changeLow":
+        case "changeHigh":
+        case "changeLow":
             if(!prim.vchannel) {
                 return "未设置断言通道";
             }
@@ -49,7 +56,7 @@ const checker = {
 }
 
 //对单个task中的所有原语执行检查，返回检查结果
-function CheckPrimitive(taskid, prim_array) {
+function CheckPrimitive(task_id, prim_array) {
     let result = [];
     if(!prim_array || prim_array.length===0) {
         return result;
@@ -59,8 +66,8 @@ function CheckPrimitive(taskid, prim_array) {
     for(let prim of prim_array) {
         let check_fun = checker[prim.action];
         if(check_fun) {
-            let info = check_fun(prim);
-            if(!info) {
+            let info = check_fun(prim.setting);
+            if(info) {
                 result.push({
                     task_id: task_id,
                     pri_idx: idx,
@@ -76,4 +83,4 @@ function CheckPrimitive(taskid, prim_array) {
     return result;
 }
 
-module.exports = checker;
+module.exports = CheckPrimitive;

@@ -100,14 +100,21 @@
     "action": "assert",
     "setting": {
         "$type": "assert",
-        "expression": "para1>10",
+        "expression": null,
         "assert_type": "ok"
     }
 }, {
     "action": "assert",
     "setting": {
         "$type": "assert",
-        "assert_type": "changeHIGH",
+        "expression": "para1>3",
+        "assert_type": "ok"
+    }
+}, {
+    "action": "assert",
+    "setting": {
+        "$type": "assert",
+        "assert_type": "changeHigh",
         "vchannel": "ch_dio",
         "timeout": 3000
     }

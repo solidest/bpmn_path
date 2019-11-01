@@ -40,4 +40,4 @@ async function test() {
     await test_createPathes(2);
 }
 
-assert.doesNotThrow(test, undefined, "测试通过");
+assert.doesNotThrow(test, undefined, "测试未通过");

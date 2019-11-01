@@ -1,15 +1,15 @@
 
+const assert = require("assert");
 const checkPrimitive = require('./src/CheckPrimitive');
-const primarray_demo = require("./handbook/demo/demo.json");
+const prim_array_data = require("./demo/actions.json");
 
 //执行原语数组检查
-function doCheck() {
-    let results = checkPrimitive(primarray_demo);
+function testCheck() {
+    let results = checkPrimitive("Task_1234", prim_array_data);
     assert.ok(results.length===1);
     for(let r of results) {
         console.log(r);
     }
 }
 
-
-assert.doesNotThrow(doCheck, undefined, "测试通过");
+assert.doesNotThrow(testCheck, undefined, "测试未通过");
