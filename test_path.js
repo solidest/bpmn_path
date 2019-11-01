@@ -1,8 +1,6 @@
 const assert = require("assert");
 const createMap = require('./src/MapGraph');
 const createPathBook = require('./src/PathBook');
-const createFullPath = require('./src/FullPath');
-const createLevelPath = require('./src/LevelPath');
 const bpmn_demo = require("./demo/demo.json");
 
 async function test_createPathes(depth) {
