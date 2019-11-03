@@ -9,7 +9,7 @@ async function test_createPathes(depth) {
     let pathes = map.createPathes();
 
     assert.ok(pathes);
-    console.log("\n==========生成路径总数：", pathes.length, "===========");
+    console.log("\n==========生成路径总数", pathes.length, " 路径深度",  depth," ===========");
     let index = 1;
     for(let i of pathes) {
         let find = 0;
@@ -30,14 +30,17 @@ async function test_createPathes(depth) {
             }
         }
         assert.ok(find===1);
-        console.log(index, ':', createPathBook(i));
+        console.log(index, createPathBook(i));
         index+=1;
     }
 }
 
 async function test() {
     await test_createPathes(0);
+    await test_createPathes(1);
     await test_createPathes(2);
+    await test_createPathes(3);
+    await test_createPathes(4);
 }
 
 assert.doesNotThrow(test, undefined, "测试未通过");

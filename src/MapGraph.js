@@ -112,13 +112,7 @@ class MapGraph {
             return null;
         }
 
-        if (this.path_depth === 0) {
-            //全路径组合
-            this.path_results = createFullPathes(this);
-        } else {
-            //模型分层
-            this.path_results = createLevelPathes(this);
-        }
+        this.path_results = createLevelPathes(this, this.path_depth);
         return this.path_results;
     }
 
