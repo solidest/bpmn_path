@@ -35,7 +35,7 @@
     "action": "send",
     "setting": {
         "$type": "send",
-        "protocol": null,
+        "protocol": "pr_GPS2",
         "binding": [{
             "name": "header",
             "bindtype": "value",
