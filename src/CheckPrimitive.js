@@ -43,12 +43,9 @@ function checkDelay(prim) {
     if (!prim) {
         return null;
     }
-    //TODO
-    if (!prim.timeout) {
-        return "未设置延时时间";
-    }
-    if (!prim.manual_continue) {
-        return "未设置手动继续";
+
+    if ((!prim.manual_continue) && (!prim.timeout)) {
+        return "未设置延时方式";
     }
 
     return null;
@@ -187,12 +184,7 @@ function checkCall(prim) {
     if (!prim.fun) {
         return "未设置被调用的函数名";
     }
-    if (!prim.argv) {
-        return "未设置调用函数传入的参数";
-    }
-    if (!prim.result) {
-        return "未设置执行结果赋值的参数";
-    }
+
 
     return null;
 }

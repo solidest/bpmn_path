@@ -7,7 +7,7 @@ function CheckProtocol(task_id, prim_array, cpt) {
         return result;
     }
 
-    let result = [];
+    var result = [];
     let idx = 0;
     for (let prim of prim_array) {
         switch (prim.action) {
