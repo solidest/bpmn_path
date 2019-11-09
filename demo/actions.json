@@ -13,7 +13,7 @@
             "readonly": true
         }, {
             "name": "coordinate.longitude",
-            "bindtype": "value",
+            "bindtype": null,
             "vbind": "para1"
         }, {
             "name": "coordinate.latitude",
@@ -35,7 +35,7 @@
     "action": "send",
     "setting": {
         "$type": "send",
-        "protocol": "pr_GPS",
+        "protocol": "pr_GPS2",
         "binding": [{
             "name": "header",
             "bindtype": "value",

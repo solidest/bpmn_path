@@ -1,14 +1,11 @@
 
+const binParser = require("../parser/BinParser");
+
 
 //helper for 处理表达式
 function handleExp(str_exp) {
-    //这里需要对表达式字符串进行一些处理
-    //将使用到的参数名称前面都加上argv.
-    //引号等特殊符号也需要处理一下
-    //相关函数我们这边后续会提供，可用先忽略此处
-
-    //TODO
-    return "argv." + str_exp;
+    let ast = binParser.parse(str_exp);
+    return ast.value_text("argv");
 }
 
 //获取recv原语的脚本
