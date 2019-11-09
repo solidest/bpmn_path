@@ -1,4 +1,4 @@
-site_name: 自动测试建模开发手册
+site_name: AutoTCG开发手册
 nav:
     - 概述: index.md
     - 动作原语: actions.md
