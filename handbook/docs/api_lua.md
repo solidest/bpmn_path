@@ -190,7 +190,7 @@
 #### math.tan
 #### math.tointeger
 #### math.type
-#### #### math.ult
+#### math.ult
 
 ---
 
