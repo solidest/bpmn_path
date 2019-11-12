@@ -7,6 +7,7 @@ function checkRecv(prim) {
     if (!prim.schannel) {
         return "未设置接收数据的通道";
     }
+    
     if (!prim.protocol) {
         return "未设置发送动作使用的协议";
     }
