@@ -1,0 +1,74 @@
+[
+    {
+        "protocolName": "pr_GPS",
+        "segments": [
+        {
+            "seg_type": "integer",
+            "name": "包头",
+            "bitcount": 16,
+            "default":
+            {
+                "$type": "ExpNumber",
+                "constNum": 21930
+            }
+        },
+        {
+            "seg_type": "double",
+            "name": "经度信息"
+        },
+        {
+            "seg_type": "double",
+            "name": "纬度信息",
+            "order": "smallorder",
+            "encode": "primitive"
+        },
+        {
+            "seg_type": "integer",
+            "name": "校验和",
+            "bitcount": 16,
+            "default":
+            {
+                "$type": "ExpNumber",
+                "constNum": 13125
+            }
+        },
+        {
+            "seg_type": "integer",
+            "name": "包尾",
+            "bitcount": 16,
+            "default":
+            {
+                "$type": "ExpNumber",
+                "constNum": 21930
+            }
+        }]
+    },
+
+    {
+        "protocolName": "pr_Open&CloseLock",
+        "segments": [
+        {
+            "name": "header",
+            "seg_type": "integer",
+            "order": "bigorder"
+        },
+        {
+            "name": "bikeID",
+            "seg_type": "string"
+        },
+        {
+            "name": "cmd",
+            "seg_type": "integer",
+            "bitcount": 32
+        },
+        {
+            "seg_type": "integer",
+            "name": "校验和",
+            "bitcount": 16
+        },
+        {
+            "name": "tail",
+            "seg_type": "integer"
+        }]
+    }
+]

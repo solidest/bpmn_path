@@ -1,0 +1,59 @@
+{
+    "io": "io",
+    "segments": [{
+        "seg_type": "integer",
+        "name": "header"
+    }, {
+        "seg_type": "integer",
+        "name": "token"
+    }, {
+        "seg_type": "oneof",
+        "_selected_": 0,
+        "name": "dynamic switch",
+        "items": [{
+            "condition": {
+                "$type": "ExpBeEqual",
+                "leftExp": {
+                    "$type": "ExpVar",
+                    "varName": "token"
+                },
+                "rightExp": {
+                    "$type": "ExpNumber",
+                    "constNum": 1
+                }
+            },
+            "segments": [{
+                "seg_type": "integer",
+                "name": "segment_1a"
+            }, {
+                "seg_type": "integer",
+                "name": "segment_1b"
+            }]
+        }, {
+            "condition": {
+                "$type": "ExpBeEqual",
+                "leftExp": {
+                    "$type": "ExpVar",
+                    "varName": "token"
+                },
+                "rightExp": {
+                    "$type": "ExpNumber",
+                    "constNum": 2
+                }
+            },
+            "segments": [{
+                "seg_type": "integer",
+                "name": "segment_2a"
+            }, {
+                "seg_type": "integer",
+                "name": "segment_2b"
+            }, {
+                "seg_type": "integer",
+                "name": "segment_2c"
+            }]
+        }]
+    }, {
+        "seg_type": "integer",
+        "name": "tail"
+    }]
+}

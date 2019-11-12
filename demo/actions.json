@@ -1,29 +1,37 @@
-[{
+[
+{
     "action": "recv",
-    "setting": {
+    "setting":
+    {
         "$type": "recv",
         "protocol": "pr_GPS",
-        "binding": [{
+        "binding": [
+        {
             "name": "header",
             "bindtype": "assert.ok",
             "vbind": "value==0x55AA"
-        }, {
+        },
+        {
             "name": "coordinate",
             "bindtype": "value",
             "readonly": true
-        }, {
+        },
+        {
             "name": "coordinate.longitude",
             "bindtype": null,
             "vbind": "para1"
-        }, {
+        },
+        {
             "name": "coordinate.latitude",
             "bindtype": "value",
             "vbind": "para2"
-        }, {
+        },
+        {
             "name": "verification",
             "bindtype": "assert.ok",
             "vbind": "value==crc(SUM8, longitude, latitude)"
-        }, {
+        },
+        {
             "name": "tail",
             "bindtype": "assert.ok",
             "vbind": "value==0xAA55"
@@ -31,96 +39,132 @@
         "timeout": 3000,
         "schannel": "ch_GPS"
     }
-}, {
+},
+{
     "action": "send",
-    "setting": {
+    "setting":
+    {
         "$type": "send",
         "protocol": "pr_GPS2",
-        "binding": [{
+        "binding": [
+        {
             "name": "header",
             "bindtype": "value",
             "vbind": "0x55AA"
-        }, {
+        },
+        {
             "name": "coordinate",
             "bindtype": "value",
             "readonly": true
-        }, {
+        },
+        {
             "name": "coordinate.longitude",
             "bindtype": "value",
             "vbind": "para1"
-        }, {
+        },
+        {
             "name": "coordinate.latitude",
             "bindtype": "value",
             "vbind": "para2"
-        }, {
+        },
+        {
             "name": "verification",
             "bindtype": "value",
             "vbind": "crc(SUM8, longitude, latitude)"
-        }, {
+        },
+        {
             "name": "tail",
             "bindtype": "value",
             "vbind": "0xAA55"
         }],
         "schannel": "ch_GPS"
     }
-}, {
+},
+{
     "action": "delay",
-    "setting": {
+    "setting":
+    {
         "$type": "delay",
         "manual_continue": false,
         "timeout": 999
     }
-}, {
+},
+{
     "action": "read",
-    "setting": {
+    "setting":
+    {
         "$type": "read",
-        "vchannel": "ch_dio",
+        "vchannel": "ch_dwio",
         "para": "para2"
     }
-}, {
+},
+{
     "action": "print",
-    "setting": {
+    "setting":
+    {
         "$type": "print",
-        "info": "\"arg1的值是：\", arg1"
+        "info": "\"arg1的值, 是：\", arg1, arg2, \"完毕\""
     }
-}, {
+},
+{
     "action": "write",
-    "setting": {
+    "setting":
+    {
         "$type": "write",
         "vchannel": "ch_analogy",
         "para": "para3"
     }
-}, {
+},
+{
     "action": "reset",
-    "setting": {
+    "setting":
+    {
         "$type": "reset",
         "schannel": "ch_GPS"
     }
-}, {
+},
+{
     "action": "assert",
-    "setting": {
+    "setting":
+    {
         "$type": "assert",
         "expression": null,
         "assert_type": "ok"
     }
-}, {
+},
+{
     "action": "assert",
-    "setting": {
+    "setting":
+    {
         "$type": "assert",
-        "expression": "para1>3",
+        "expression": "para1<para3",
         "assert_type": "ok"
     }
-}, {
+},
+{
     "action": "assert",
-    "setting": {
+    "setting":
+    {
         "$type": "assert",
         "assert_type": "changeHigh",
         "vchannel": "ch_dio",
         "timeout": 3000
     }
-}, {
+},
+{
+    "action": "assert",
+    "setting":
+    {
+        "$type": "assert",
+        "assert_type": "changeLow",
+        "vchannel": "ch_dio",
+        "timeout": 3002
+    }
+},
+{
     "action": "call",
-    "setting": {
+    "setting":
+    {
         "$type": "call",
         "fun": "function_name",
         "argv": "para1, para2"

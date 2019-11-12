@@ -1,0 +1,22 @@
+{
+    "segments": [{
+        "name": "header",
+        "seg_type": "integer"
+    }, {
+        "name": "segment_xxx",
+        "seg_type": "integer"
+    }, {
+        "name": "segment_group",
+        "seg_type": "group",
+        "segments": [{
+            "name": "sub_segment_a",
+            "seg_type": "integer"
+        }, {
+            "name": "sub_segment_b",
+            "seg_type": "integer"
+        }]
+    }, {
+        "name": "tail",
+        "seg_type": "integer"
+    }]
+}
