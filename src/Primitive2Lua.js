@@ -43,7 +43,7 @@ function getDelayScript(prim) {
 function getPrintScript(prim) {
     let scripts = "\tprint(";
     let args = [];
-    let infos = prim.info.split(/, |,/);
+    let infos = prim.info.split(/ *, */);
     for (let i = 0; i < infos.length; i++) {
         if (infos[i].includes("\"")) {
             if (infos[i].charAt(infos[i].length - 1) != "\"") {
@@ -84,13 +84,13 @@ function getResetScript(prim) {
 //获取call原语的脚本
 function getCallScript(prim) {
     let scripts = `\t${prim.fun}(`;
-    argvs = prim.argv.split(/, |,/);
+    argvs = prim.argv.split(/ *, */);
     for (let i = 0; i < argvs.length; i++) {
         scripts = scripts + "argv." + argvs[i];
         if (i != argvs.length - 1)
             scripts = scripts + ", ";
     }
-    scripts = scripts + ")"
+    scripts = scripts + ")";
     //scripts.push(`\t${prim.fun}(${prim.argv})`);
     return [scripts];
 }
