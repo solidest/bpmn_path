@@ -1,5 +1,5 @@
 const binParser = require("../parser/BinParser");
-
+const shortid = require('shortid');
 
 //helper for 处理表达式
 function handleExp(str_exp) {
@@ -9,17 +9,67 @@ function handleExp(str_exp) {
 
 //获取recv原语的脚本
 function getRecvScript(prim) {
-    
+    let scripts = [];
+    let tableName = shortid.generate();
+    return scripts;
+
 }
 
 //获取send原语的脚本
 function getSendScript(prim) {
-    
+    let scripts = [];
+    let tableName = shortid.generate();
+    let proInfo = prim.binding;
+    scripts.push(`\t--按协议字段组成构造出一个table来`);
+    scripts.push(`\tlocal ${tableName} = {}`);
+    let iniList = [] //初始化的列表
+    for (let seg of proInfo) {
+        if (seg.vbind) {
+            //当vbind绑定的是一个group中的子字段时，检查父字段有没有初始化
+            if (/[A-Za-z_][A-Za-z0-9_]*\.[A-Za-z_][A-Za-z0-9_]*/.test(seg.name)) {
+                let group = seg.name.split(".")[0];
+                if (iniList.indexOf(group) == -1) {
+                    scripts.push(`\t${tableName}.${seg.name} = {}`);
+                    scripts.push(`\t${tableName}.${seg.name} = ${handleExp(seg.vbind)}`);
+                    iniList.push(group);
+                } else {
+                    scripts.push(`\t${tableName}.${seg.name} = ${handleExp(seg.vbind)}`);
+                }
+
+            } else {
+                //当vbind不是表达式时，handleExp会报错，使用trycatch捕获，例如"vbind": "crc(SUM8, longitude, latitude)"
+                try {
+                    scripts.push(`\t${tableName}.${seg.name} = ${handleExp(seg.vbind)}`);
+                } catch (e) {
+                    scripts.push(`\t${tableName}.${seg.name} = ${seg.vbind}`);
+                }
+            }
+
+            //以下是利用参数列表的方法来判断参数，已经废弃
+            /*let flag = 0;
+            for (let para of paraList) {
+                if (seg.vbind == para) {
+                    scripts.push(`\t${tableName}.${seg.name} = argv.${seg.vbind}`);
+                    flag = 1;
+                }
+            }
+            if (flag == 0)
+                scripts.push(`\t${tableName}.${seg.name} = ${seg.vbind}`);
+            */
+        }
+    }
+    scripts.push(`\t--在${prim.schannel}接口上，按照${prim.protocol}协议打包并发送table`);
+    scripts.push(`\tsend(cit.${prim.schannel}, cpt.${prim.protocol}, ${tableName})`);
+    //console.log(scripts);
+    return scripts;
+
+
 }
 
 //获取read原语的脚本
 function getReadScript(prim) {
     let scripts = [];
+
     scripts.push(`\tread(${prim.vchannel})`);
     return scripts;
 }
@@ -27,6 +77,7 @@ function getReadScript(prim) {
 //获取write原语的脚本
 function getWriteScript(prim) {
     let scripts = [];
+
     scripts.push(`\twrite(${prim.vchannel}, argv.${prim.para})`);
     return scripts;
 }
@@ -58,16 +109,16 @@ function getPrintScript(prim) {
     }
     //console.log(args);
     for (let i = 0; i < args.length; i++) {
-        if (args[i].includes("\"")) 
+        if (args[i].includes("\""))
             scripts = scripts + args[i];
-        else 
+        else
             scripts = scripts + "argv." + args[i];
-        
+
         if (i != args.length - 1)
             scripts = scripts + ", ";
         else
             scripts = scripts + ")";
-        
+
     }
 
 
@@ -138,7 +189,7 @@ const generator = {
 }
 
 //将task中的所有原语执行生成一个函数
-function Primitive2Lua(task_id, prim_array) {
+function Primitive2Lua(task_id, prim_array, paraList) {
     let script_arr = [`function ${task_id}(argv)`];
     if (!prim_array || prim_array.length === 0) {
         return '';
@@ -149,14 +200,16 @@ function Primitive2Lua(task_id, prim_array) {
     for (let prim of prim_array) {
         let get_fun = generator[prim.action];
         if (get_fun) {
-            let prim_script = get_fun(prim.setting);
+            let prim_script = [];
+
+            prim_script = get_fun(prim.setting);
+
             if (prim_script && prim_script.length > 0) {
                 let tmp = lineNum;
                 lineNum = lineNum + prim_script.length;
                 primDict.push([tmp, lineNum]);
                 script_arr = script_arr.concat(prim_script);
-            }
-            else
+            } else
                 primDict.push([lineNum, lineNum]);
         } else {
             console.log(`未执行对<${prim.action}>原语的脚本转换`);

@@ -17,7 +17,7 @@ function getWrongPrim(primDict, lineNum) {
 
 //执行原语脚本生成
 function testPrim2Lua() {
-    let result = Primitive2Lua("Task_1234", prim_array_data);
+    let result = Primitive2Lua("Task_1234", prim_array_data, ["para1", "para2", "para3"]);
     //assert.ok(script.length>10);
     //console.log(result);
     console.log(result[0].join("\n"));
