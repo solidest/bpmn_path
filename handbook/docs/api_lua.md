@@ -2,7 +2,7 @@
 > ETestLite使用Lua做为开发用例的脚本语言，除[标准库](#_2)里的全局函数外，执行引擎还内置有[engine](#engine)、[event](#event)、[assert](#assert)、[task](#task)、[math](#math)、[string](#string)、[table](#table)等API库
 
 ---
-### 标准库
+### 基础库
 
 #### cit 
     通信接口表（communication interface table），执行引擎中已经添加的全部接口表
