@@ -18,7 +18,7 @@
         },
         {
             "name": "coordinate.longitude",
-            "bindtype": null,
+            "bindtype": "value",
             "vbind": "para1"
         },
         {

@@ -11,8 +11,24 @@ function handleExp(str_exp) {
 function getRecvScript(prim) {
     let scripts = [];
     let tableName = shortid.generate();
+    let proInfo = prim.binding;
+    scripts.push(`\t--在${prim.schannel}接口上，按照${prim.protocol}协议来接收数据`);
+    scripts.push(`\tlocal ${tableName} = recv(cit.${prim.schannel}, cpt.${prim.protocol}, ${prim.timeout})`);
+    for (let seg of proInfo) {
+        if (seg.bindtype == "assert.ok") {
+            //当bindtype为assert时，转化为assert.ok语句
+            let vbind = seg.vbind.replace(/\s*/g, "");
+            vbind = vbind.split("==")[1];
+            scripts.push(`\tassert.ok(${tableName}.${seg.name} == ${vbind})`);
+        } else if (seg.bindtype == "value") {
+            //当bindtype为value时，给指定参数赋值
+            if (seg.vbind)
+                scripts.push(`\targv.${seg.vbind} = ${tableName}.${seg.name}`);
+        } else {
+            console.log("错误的绑定类型！");
+        }
+    }
     return scripts;
-
 }
 
 //获取send原语的脚本
