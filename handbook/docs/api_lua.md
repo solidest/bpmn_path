@@ -13,12 +13,6 @@
 #### cvt
     现时变量表（current value talbe），执行引擎中已添加的全部现时变量表
 
-#### cvtNew ( name )
-    添加一个现时变量
-
-#### cvtDel ( name )
-    删除一个现时变量
-
 #### cvtSet ( name, value )
     设置现时变量的值
 
