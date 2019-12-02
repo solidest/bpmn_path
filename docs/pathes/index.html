@@ -8,7 +8,7 @@
   
   
   <link rel="shortcut icon" href="../img/favicon.ico">
-  <title>ETestRT 引擎API - AutoTCG开发手册</title>
+  <title>路径文件 - AutoTCG开发手册</title>
   <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
 
   <link rel="stylesheet" href="../css/theme.css" type="text/css" />
@@ -17,8 +17,8 @@
   
   <script>
     // Current page data
-    var mkdocs_page_name = "ETestRT \u5f15\u64ceAPI";
-    var mkdocs_page_input_path = "api_rt.md";
+    var mkdocs_page_name = "\u8def\u5f84\u6587\u4ef6";
+    var mkdocs_page_input_path = "pathes.md";
     var mkdocs_page_url = null;
   </script>
   
@@ -58,17 +58,20 @@
     <a class="" href="../actions/">动作原语</a>
 	    </li>
           
-            <li class="toctree-l1">
-		
-    <a class="" href="../api_usb/">ETestUSB 引擎API</a>
-	    </li>
-          
             <li class="toctree-l1 current">
 		
-    <a class="current" href="./">ETestRT 引擎API</a>
+    <a class="current" href="./">路径文件</a>
     <ul class="subnav">
             
     <li class="toctree-l2"><a href="#_1">概述</a></li>
+    
+        <ul>
+        
+            <li><a class="toctree-l3" href="#_2">示例数据</a></li>
+        
+            <li><a class="toctree-l3" href="#_3">说明</a></li>
+        
+        </ul>
     
 
     </ul>
@@ -76,17 +79,12 @@
           
             <li class="toctree-l1">
 		
-    <a class="" href="../api_lua/">ETestLite 引擎API</a>
+    <a class="" href="../interface/">接口文件</a>
 	    </li>
           
             <li class="toctree-l1">
 		
-    <a class="" href="../interface/">接口配置</a>
-	    </li>
-          
-            <li class="toctree-l1">
-		
-    <a class="" href="../protocol/">协议配置</a>
+    <a class="" href="../protocol/">协议文件</a>
 	    </li>
           
         </ul>
@@ -111,7 +109,7 @@
     
       
     
-    <li>ETestRT 引擎API</li>
+    <li>路径文件</li>
     <li class="wy-breadcrumbs-aside">
       
     </li>
@@ -122,9 +120,52 @@
             <div class="section">
               
                 <h2 id="_1">概述</h2>
-<blockquote>
-<p>ETest RT执行引擎api接口说明</p>
-</blockquote>
+<p>路径文件是AutoTCG从模型自动生成用例的输出文件，使用json格式</p>
+<hr />
+<h4 id="_2">示例数据</h4>
+<pre><code>{
+"pathes": [
+    ["StartEvent_0agjamv", "Task_1yuwf7l", "Start_ZbSXG4Bm", "Task_11moj6f", "Task_0c4ngpw", "Task_0r43ltt", "EndEvent_0bz9hb9"],
+    ["StartEvent_0agjamv", "Task_1yuwf7l", "Task_1hrmspd", "Task_1pdgdxt", "Start_ZbSXG4Bm", "Task_11moj6f", "Task_0c4ngpw", "Task_0r43ltt", "EndEvent_0bz9hb9"]
+    ],
+"wise": [
+    [{
+        "arg_a": 298,
+        "b": 3.7,
+        "d": "b",
+        "c": "a"
+    }, {
+        "arg_a": 300,
+        "b": 3.7,
+        "d": "b",
+        "c": "a"
+    }],
+    [{
+        "arg_a": 298,
+        "f": 100,
+        "d": "b",
+        "c": "a"
+    }]
+],
+"actions": {
+    "Task_0o89e8s": [{},{}],
+    "Task_987e2df": [{},{}]
+},
+"scripts": {
+    "Task_0gkk31u": "--输入脚本\nfunction abc()\n    print(\"hello!\")\nend",
+    "Task_76y6sf3": "--输入脚本\nfunction abc()\n    print(\"hello!\")\nend"
+}
+</code></pre>
+<p>}</p>
+<hr />
+<h4 id="_3">说明</h4>
+<ul>
+<li>pathes： 二位数组，路径节点id组成的可执行路径</li>
+<li>wise：二位数组，执行路径对应的输入参数组合</li>
+<li>actions：对象字典，以节点id为主键，键值是动作序列数组</li>
+<li>scripts：对象字典，以节点id为主键，键值是脚本内容</li>
+</ul>
+<hr />
               
             </div>
           </div>
@@ -132,10 +173,10 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../api_lua/" class="btn btn-neutral float-right" title="ETestLite 引擎API">Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="../interface/" class="btn btn-neutral float-right" title="接口文件">Next <span class="icon icon-circle-arrow-right"></span></a>
       
       
-        <a href="../api_usb/" class="btn btn-neutral" title="ETestUSB 引擎API"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../actions/" class="btn btn-neutral" title="动作原语"><span class="icon icon-circle-arrow-left"></span> Previous</a>
       
     </div>
   
@@ -161,10 +202,10 @@
     <span class="rst-current-version" data-toggle="rst-current-version">
       
       
-        <span><a href="../api_usb/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+        <span><a href="../actions/" style="color: #fcfcfc;">&laquo; Previous</a></span>
       
       
-        <span style="margin-left: 15px"><a href="../api_lua/" style="color: #fcfcfc">Next &raquo;</a></span>
+        <span style="margin-left: 15px"><a href="../interface/" style="color: #fcfcfc">Next &raquo;</a></span>
       
     </span>
 </div>

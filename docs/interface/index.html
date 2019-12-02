@@ -8,7 +8,7 @@
   
   
   <link rel="shortcut icon" href="../img/favicon.ico">
-  <title>接口配置 - AutoTCG开发手册</title>
+  <title>接口文件 - AutoTCG开发手册</title>
   <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
 
   <link rel="stylesheet" href="../css/theme.css" type="text/css" />
@@ -17,7 +17,7 @@
   
   <script>
     // Current page data
-    var mkdocs_page_name = "\u63a5\u53e3\u914d\u7f6e";
+    var mkdocs_page_name = "\u63a5\u53e3\u6587\u4ef6";
     var mkdocs_page_input_path = "interface.md";
     var mkdocs_page_url = null;
   </script>
@@ -60,31 +60,23 @@
           
             <li class="toctree-l1">
 		
-    <a class="" href="../api_usb/">ETestUSB 引擎API</a>
-	    </li>
-          
-            <li class="toctree-l1">
-		
-    <a class="" href="../api_rt/">ETestRT 引擎API</a>
-	    </li>
-          
-            <li class="toctree-l1">
-		
-    <a class="" href="../api_lua/">ETestLite 引擎API</a>
+    <a class="" href="../pathes/">路径文件</a>
 	    </li>
           
             <li class="toctree-l1 current">
 		
-    <a class="current" href="./">接口配置</a>
+    <a class="current" href="./">接口文件</a>
     <ul class="subnav">
             
     <li class="toctree-l2"><a href="#_1">概述</a></li>
     
         <ul>
         
-            <li><a class="toctree-l3" href="#_2">目标设备</a></li>
+            <li><a class="toctree-l3" href="#_2">通道名称</a></li>
         
-            <li><a class="toctree-l3" href="#_3">工具设备</a></li>
+            <li><a class="toctree-l3" href="#tool">工具设备 tool</a></li>
+        
+            <li><a class="toctree-l3" href="#_3">目标设备</a></li>
         
         </ul>
     
@@ -94,7 +86,7 @@
           
             <li class="toctree-l1">
 		
-    <a class="" href="../protocol/">协议配置</a>
+    <a class="" href="../protocol/">协议文件</a>
 	    </li>
           
         </ul>
@@ -119,7 +111,7 @@
     
       
     
-    <li>接口配置</li>
+    <li>接口文件</li>
     <li class="wy-breadcrumbs-aside">
       
     </li>
@@ -131,10 +123,35 @@
               
                 <h2 id="_1">概述</h2>
 <p>接口配置用于描述<a href="#_2">目标设备</a>接口与<a href="#_3">工具设备</a>接口之间的连接参数</p>
-<h4 id="_2">目标设备</h4>
-<p>目标设备指ETest中执行输入输出时的目标对象设备，在测试业务中即为被测设备</p>
-<h4 id="_3">工具设备</h4>
-<p>工具设备指测试/仿真工具硬件，也就是运行ETest的硬件设备</p>
+<p>示例数据：</p>
+<pre><code>{
+    "name": "demo1",
+    "tool": {
+        "machine": "xxx.xxx.xxx.xxx",
+        "device": "virtual device",
+        "idx": "0",
+        "interface": "com1"
+    },
+    "target": {
+        "type": "di"
+    }
+}
+</code></pre>
+<h4 id="_2">通道名称</h4>
+<ul>
+<li>用户自定义的接口名称</li>
+<li>name：字符串</li>
+</ul>
+<h4 id="tool">工具设备 tool</h4>
+<ul>
+<li>工具设备指测试/仿真工具硬件，也就是运行ETest的硬件设备</li>
+<li>tool：字典对象，设备参数配置</li>
+</ul>
+<h4 id="_3">目标设备</h4>
+<ul>
+<li>目标设备指ETest中执行输入输出时的目标对象设备，在测试业务中即为被测设备</li>
+<li>target：对象字典，设备参数配置</li>
+</ul>
               
             </div>
           </div>
@@ -142,10 +159,10 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../protocol/" class="btn btn-neutral float-right" title="协议配置">Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="../protocol/" class="btn btn-neutral float-right" title="协议文件">Next <span class="icon icon-circle-arrow-right"></span></a>
       
       
-        <a href="../api_lua/" class="btn btn-neutral" title="ETestLite 引擎API"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../pathes/" class="btn btn-neutral" title="路径文件"><span class="icon icon-circle-arrow-left"></span> Previous</a>
       
     </div>
   
@@ -171,7 +188,7 @@
     <span class="rst-current-version" data-toggle="rst-current-version">
       
       
-        <span><a href="../api_lua/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+        <span><a href="../pathes/" style="color: #fcfcfc;">&laquo; Previous</a></span>
       
       
         <span style="margin-left: 15px"><a href="../protocol/" style="color: #fcfcfc">Next &raquo;</a></span>
