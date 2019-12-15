@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  
+  <link rel="shortcut icon" href="../img/favicon.ico">
+  <title>执行引擎 - AutoTCG开发手册</title>
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="../css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "\u6267\u884c\u5f15\u64ce";
+    var mkdocs_page_input_path = "engine.md";
+    var mkdocs_page_url = null;
+  </script>
+  
+  <script src="../js/jquery-2.1.1.min.js" defer></script>
+  <script src="../js/modernizr-2.8.3.min.js" defer></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script> 
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+      <div class="wy-side-nav-search">
+        <a href=".." class="icon icon-home"> AutoTCG开发手册</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+	<ul class="current">
+	  
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="..">概述</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../actions/">动作原语</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../pathes/">路径文件</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../interface/">接口文件</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../protocol/">协议文件</a>
+	    </li>
+          
+            <li class="toctree-l1 current">
+		
+    <a class="current" href="./">执行引擎</a>
+    <ul class="subnav">
+            
+    <li class="toctree-l2"><a href="#_1">概述</a></li>
+    
+        <ul>
+        
+            <li><a class="toctree-l3" href="#cpt">CPT</a></li>
+        
+            <li><a class="toctree-l3" href="#cvt">CVT</a></li>
+        
+            <li><a class="toctree-l3" href="#cit">CIT</a></li>
+        
+            <li><a class="toctree-l3" href="#srv">SRV</a></li>
+        
+            <li><a class="toctree-l3" href="#eng">ENG</a></li>
+        
+            <li><a class="toctree-l3" href="#sch">SCH</a></li>
+        
+            <li><a class="toctree-l3" href="#api">API</a></li>
+        
+            <li><a class="toctree-l3" href="#vm">VM</a></li>
+        
+            <li><a class="toctree-l3" href="#lua">LUA</a></li>
+        
+            <li><a class="toctree-l3" href="#stdb">STDB</a></li>
+        
+            <li><a class="toctree-l3" href="#rt">RT</a></li>
+        
+        </ul>
+    
+
+    </ul>
+	    </li>
+          
+        </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="..">AutoTCG开发手册</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="..">Docs</a> &raquo;</li>
+    
+      
+    
+    <li>执行引擎</li>
+    <li class="wy-breadcrumbs-aside">
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h2 id="_1">概述</h2>
+<ul>
+<li>执行引擎指ETestLite下位机执行环境</li>
+<li>采用C/C++ 11开发，跨Windows/Linux平台，无依赖</li>
+<li>编译输出为单个二进制可执行文件，无外部引用</li>
+</ul>
+<p>核心模块组成：</p>
+<table>
+<thead>
+<tr>
+<th>模块</th>
+<th>名称</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="#cpt">CPT</a></td>
+<td>通信协议表</td>
+<td>协议模版管理器，提供协议注册、注销、打包、解包API</td>
+</tr>
+<tr>
+<td><a href="#cvt">CVT</a></td>
+<td>通信变量表</td>
+<td>全局变量管理器，实现线程安全机制和事件订阅分发机制</td>
+</tr>
+<tr>
+<td><a href="#cit">CIT</a></td>
+<td>通信接口表</td>
+<td>接口管理器，实现驱动加载、执行数据IO和自动采集</td>
+</tr>
+<tr>
+<td><a href="#srv">SRV</a></td>
+<td>网络服务接口</td>
+<td>tcp监听服务，接收执行设计器（上位机）发送的命令</td>
+</tr>
+<tr>
+<td><a href="#eng">ENG</a></td>
+<td>执行引擎对象</td>
+<td>负责创建和清理执行环境的所有核心对象</td>
+</tr>
+<tr>
+<td><a href="#sch">SCH</a></td>
+<td>调度器</td>
+<td>负责用例执行时的异步（线程、协程）调度</td>
+</tr>
+<tr>
+<td><a href="#api">API</a></td>
+<td>用户开发API</td>
+<td>供用户开发用例使用的API（开发语言类型无关）</td>
+</tr>
+<tr>
+<td><a href="#vm">VM</a></td>
+<td>虚拟机抽象接口</td>
+<td>定义脚本语言类型无关的虚拟机抽象接口</td>
+</tr>
+<tr>
+<td><a href="#lua">LUA</a></td>
+<td>LUA脚本绑定</td>
+<td>LUA语言的VM接口实现</td>
+</tr>
+<tr>
+<td><a href="#stdb">STDB</a></td>
+<td>时序数据库引擎</td>
+<td>提供按Key和时间戳存储、查询数据的功能</td>
+</tr>
+<tr>
+<td><a href="#rt">RT</a></td>
+<td>实时任务接口</td>
+<td>封装了Linux RT的实时任务API</td>
+</tr>
+</tbody>
+</table>
+<h4 id="cpt">CPT</h4>
+<p>通信协议表（Communication Protocol Table)，核心API如下：</p>
+<ul>
+<li>NewProtocol 新建协议模版</li>
+<li>DelProtocol 删除协议模版</li>
+<li>PackFrame 打包一帧报文</li>
+<li>UnpackFrame 解包一帧报文</li>
+</ul>
+<p>如需粘包解析，使用以下一组API：</p>
+<ul>
+<li>CreateUnpackTask 创建一个解包任务</li>
+<li>FeedRecvBuffer 分步将buffer添加到解包任务中</li>
+<li>ReleaseUnpackTask 释放解包任务</li>
+</ul>
+<p>说明：</p>
+<ul>
+<li>CPT可完全独立使用，打包输入和解包输出均为c++ json对象（注意：非json字符串）</li>
+<li>绑定到特定语言环境时，推荐使用类型映射的方式，避免使用json序列化带来性能损失</li>
+<li>详细API参数，请查阅 src/CPT.h 文件</li>
+</ul>
+<h4 id="cvt">CVT</h4>
+<p>通信变量表（Communication Value Table)，核心API如下：</p>
+<ul>
+<li>SetValue：设置变量值</li>
+<li>GetValue：获取变量值</li>
+<li>Sub：订阅变量修改事件</li>
+<li>UnSub：取消订阅</li>
+</ul>
+<p>说明：</p>
+<ul>
+<li>CVT的API函数全部是线程安全的</li>
+<li>详细API参数，请查阅 src/CVT.h 文件</li>
+</ul>
+<h4 id="cit">CIT</h4>
+<p>通信接口表（Communication Interface Table)，核心API如下：</p>
+<ul>
+<li>Initial：初始化CIT，加载驱动程序</li>
+<li>RegisterCard：注册一个硬件设备</li>
+<li>RegisterDataInterface：注册一个数据流类型接口</li>
+<li>RegisterDigitalInterface：注册一个数字信号接口</li>
+<li>RegisterAnalogInterface：注册一个模拟信号接口</li>
+<li>RegisterExfun：注册一个驱动自定义API函数</li>
+</ul>
+<p>说明：</p>
+<ul>
+<li>硬件驱动程序采用标准动态库格式，windows下为.dll，linux下为.so</li>
+<li>驱动程序必须导出 e_initial、e_release两个函数</li>
+<li>驱动封装请引用头文件 src/drv/drvdef.h</li>
+<li>自动采集可以选择poll、select、tick三种模式任一种</li>
+<li>更多API细节，请查阅 src/CIT.h 和 src/drv/InterfaceXXXX.h</li>
+</ul>
+<h4 id="srv">SRV</h4>
+<p>网络服务接口（Server API)用来接收外部命令，命令包括：</p>
+<ul>
+<li>ping：正常返回字符串：pong</li>
+<li>state：返回执行引擎当前状态：idle/prepared/running/pause 四种状态之一</li>
+<li>exit：退出整个执行引擎进程</li>
+<li>prepare：准备执行环境</li>
+<li>start：开始执行用例</li>
+<li>stop：停止执行用例</li>
+<li>clear：清除执行环境</li>
+<li>continue：继续处于暂停状态的执行引擎</li>
+<li>pauseInfo：返回暂停时的提示信息</li>
+<li>outDigital：查询数字量接口的输出记录</li>
+<li>outAnalog：查询模拟量接口的输出记录</li>
+<li>outData：查询字节流接口的输出记录</li>
+<li>outProt：查询协议打包输出记录</li>
+<li>inDigital：查询数字量接口的输入记录</li>
+<li>inAnalog：查询模拟量接口的输入记录</li>
+<li>inData：查询字节流接口的输入记录</li>
+<li>inProt：查询协议解包输入记录</li>
+<li>sysOut：查询系统输出记录</li>
+</ul>
+<p>SRV支持两种客户端连接：</p>
+<ul>
+<li>telnet客户端：直接使用telnet命令连接SRV，从命令行输入命令</li>
+<li>使用任一开发语言的<a href="https://redis.io/clients">redis客户端</a>连接到SRV，发送命令到服务器即可</li>
+</ul>
+<p>说明：</p>
+<ul>
+<li>SRV是执行引擎主线程上运行的唯一任务</li>
+<li>SRV默认协议和端口号为 TCP 1210，可替换为UDP或Unix Socket协议</li>
+<li>SRV仅使用了redis传输协议的部分源代码，并不使用redis的任何模块</li>
+<li>详细API参数，请查阅 src/SRV.h 文件</li>
+</ul>
+<h4 id="eng">ENG</h4>
+<p>引擎对象（Engine Object)，实现执行环境对象的创建和清理</p>
+<ul>
+<li>详细实现，请查阅 src/ENG.h 文件</li>
+</ul>
+<h4 id="sch">SCH</h4>
+<p>调度器（scheduling API)，实现执行用例的异步调度</p>
+<ul>
+<li>基于开源c语言库libuv实现</li>
+<li>用例执行被放在主事件循环(uv_loop)上</li>
+<li>
+<p>IO执行全部采用异步模式，以保证主循环无阻塞</p>
+</li>
+<li>
+<p>详细实现，请查阅 src/SCH.h 文件</p>
+</li>
+</ul>
+<h4 id="api">API</h4>
+<ul>
+<li>用户开发API（User SDK)，提供给用户开发用例使用的API</li>
+<li>
+<p>仅包含底层实现，未绑定特定脚本语言</p>
+</li>
+<li>
+<p>详细信息，请查阅 src/api 目录</p>
+</li>
+</ul>
+<h4 id="vm">VM</h4>
+<ul>
+<li>虚拟机抽象接口（Virtual Machine API），定义脚本语言虚拟机的抽象接口</li>
+<li>
+<p>接口定义可以兼容lua、python、.net、javascript四种类型虚拟机</p>
+</li>
+<li>
+<p>详细信息，请查阅 src/VM.h 文件</p>
+</li>
+</ul>
+<h4 id="lua">LUA</h4>
+<ul>
+<li>提供lua vm下的VM接口实现</li>
+<li>提供c++ json class与lua table数据类型之间的映射</li>
+<li>实现用户API的lua语言绑定</li>
+<li>修改了lua gc算法，满足1ms实时性要求</li>
+<li>说明：lua vm已采用静态编译，无需单独安装</li>
+<li>详细信息，请查阅 src/lua 目录</li>
+</ul>
+<h4 id="stdb">STDB</h4>
+<p>STDB（Simulation Test Database），仿真测试专用的数据库引擎，主要API：</p>
+<ul>
+<li>set：存储一个带时间戳的二进制安全的字符串数据</li>
+<li>seti：存储一个带时间戳的整数值（模拟信号量）</li>
+<li>setb：存储一个带时间戳的布尔值（数字信号量）</li>
+<li>get：按主键和时间戳查询字节流数据</li>
+<li>geti 同上</li>
+<li>getb 同上</li>
+<li>lget 按主键和开始时间查询数据</li>
+<li>lgetb 同上</li>
+<li>lgeti 同上</li>
+<li>lrange 按主键、开始时间和结束时间查询数据</li>
+<li>lrangei 同上</li>
+<li>lrangeb 同上</li>
+</ul>
+<p>说明：</p>
+<ul>
+<li>建议将接口名称加 _in或_out作为主键</li>
+<li>STDB底层使用level db引擎，存储格式为sst文件</li>
+<li>可以管理TB级别的数据，单个数据库建议不超过100TB</li>
+<li>API详细参数，请查阅 src/db 目录</li>
+</ul>
+<h4 id="rt">RT</h4>
+<p>实时任务接口（Real Time API），核心API如下：</p>
+<ul>
+<li>rt_task 立即启动一个实时任务</li>
+<li>rt_task_timeout 启动一个延时实时任务</li>
+<li>
+<p>rt_task_interval 启动一个周期性实时任务</p>
+</li>
+<li>
+<p>API详细参数，请查阅 src/rt 目录</p>
+</li>
+</ul>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+      
+        <a href="../protocol/" class="btn btn-neutral" title="协议文件"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+      
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+      
+        <span><a href="../protocol/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+    </span>
+</div>
+    <script>var base_url = '..';</script>
+    <script src="../js/theme.js" defer></script>
+      <script src="../search/main.js" defer></script>
+
+</body>
+</html>
